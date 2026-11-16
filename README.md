@@ -1,23 +1,38 @@
-# Training OS PWA — GitHub Pages (109 illustrations)
+# AMG Core — Core & Stability expansion
 
-**This is the public-site starter. It includes all 109 exercise illustrations, including the 26 images created and supplied by the app owner. It does NOT include personal training, progress, nutrition, or InBody records embedded in the private snapshot.**
+Single-file offline app plus GitHub Pages PWA deployment files.
 
-## Publish
-1. Create a GitHub repository (e.g. `trainingos`).
-2. Upload everything from this folder to the repository root, especially `index.html`, `sw.js`, `manifest.webmanifest`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`, and `.nojekyll`.
-3. Open Settings > Pages > Deploy from a branch > main > /(root) > Save.
-4. Use `https://YOURUSERNAME.github.io/trainingos/` on the phone.
-5. Android Chrome: Install app / Add banner when available. iPhone Safari: Share > Add to Home Screen.
-6. Open online once, then verify the app loads offline; service-worker installability requires HTTPS/localhost.
+## Catalog
+142 unique exercises with embedded images.
+Dedicated Core, Stability & Mobility Tab: 39 movements — 12 mobility, 19 core stability, 6 abs, 2 balance & joint stability.
+Filter the dedicated Tab by category, muscle, Arabic/English name and level (Basic / Intermediate / Advanced). Each movement displays its purpose and level. Levels describe general movement complexity, not an individual clearance or load prescription.
 
-## Ownership and privacy
-- The **26 user-created illustrations** were restored following the owner's confirmation of authorship and permission to include them in the published app. Their claimed authorship was not independently verified.
-- Source credits for RepDB and Open Exercise Illustrations remain in the app. Review any other third-party artwork and recipe terms before public redistribution.
-- **Do not upload** your personal edition or JSON backups. The public `index.html` has its embedded save snapshot set to `{"state":null}` and sanitizes personal defaults.
-- Do not paste personal workout/nutrition data into publicly accessible repository files. Site-local user entries on an installed PWA remain device/browser local; uninstall/clear-site-data can erase them.
-- Publishing the app does not automatically synchronize data across devices. Use private JSON backups for transfer.
+## Newly integrated movements
+CS01 Bear Plank Hold — seconds
+CS02 High Plank Shoulder Taps — reps (one touch = one rep)
+CS03 Farmer’s Carry — seconds (weight field = load per hand)
+CS04 Half-Kneeling Cable Chop — reps per side
+CS05 Half-Kneeling Cable Lift — reps per side
+CS06 Single-Leg Glute Bridge — reps per side
+CS07 Forearm Plank Body Saw — reps (one back-and-forward cycle = one rep)
+CS08 Stability Ball Stir the Pot — reps (one complete circle = one rep)
+BS01 Single-Leg Balance with Reach — reps per side
+BS02 Controlled Step-Down — reps per side
 
-## Offline updates
-This package bumps the service-worker cache ID to `trainingos-pwa-v953-2`, so an existing installation can fetch updated resources. When updating an installed copy, revisit the live site online and reload before testing offline.
+The supplied PNGs were converted to WebP at original dimensions. Compact movement previews now open in a bounded dialog up to 2x the actual preview width and height, clamped to the viewport. Separate target-muscle anatomy images and atlas are removed; muscle names and filters remain.
 
-Update: Added "Developed By AMG Suit" footer on About; Service Worker cache updated for new version.
+## Logging
+- Optional additional movements: one row per selected movement, + at the end of a row to add another row, Save Set 1/2/3 for repeated sets. Seconds and repetitions stay distinct.
+- Additional strength exercises can be added only to the selected date/session, with an optional superset association. Each exercise has independent set numbers in the standard workout log.
+- Additional records and exercise definitions remain profile/date/plan/split/session scoped and are included in profile/full JSON and portable HTML backups. Original split templates and pre-existing logs are preserved.
+
+## Install / update
+Take a JSON backup first. Replace the deployment files in the same GitHub Pages repository. Keep the same site URL and browser storage. The Service Worker cache version is updated. For a standalone offline copy, open index.html. Nothing was deployed externally by this update.
+
+## Validation
+JavaScript syntax, embedded image decoding and JSDOM functional tests. Chromium visual testing is unavailable in this runtime.
+
+## Mobile browser upload
+index.html is 20,075,619 bytes (19.15 MiB), below GitHub's documented 25 MiB per-file browser upload limit. Only superseded embedded image payloads were removed from retired collections; all 142 currently displayed image payloads are byte-identical to the previous release. Offline operation, bounded 2x zoom, logging and backups remain available.
+
+Take a JSON backup. Extract this ZIP on your phone. In Chrome, open the existing repository and enable Desktop site if needed. Open the same publishing branch and folder as the existing index.html. Use Add file > Upload files, select the extracted files (including index.html and sw.js), review the changes and commit. Wait for Pages deployment to finish, then reopen the existing app URL. Do not upload the ZIP as the site entry point or clear browser storage.

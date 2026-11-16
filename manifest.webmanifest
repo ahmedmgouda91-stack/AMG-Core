@@ -1,14 +1,14 @@
 {
   "id": "./",
-  "name": "Training OS",
-  "short_name": "Training OS",
-  "description": "Offline training and nutrition tracker",
+  "name": "AMG Core",
+  "short_name": "AMG Core",
+  "description": "Train • Fuel • Evolve — fitness, nutrition and insights by AMG Suite",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#0b111b",
-  "theme_color": "#b5f26a",
+  "background_color": "#0B0D10",
+  "theme_color": "#0B0D10",
   "categories": [
     "health",
     "fitness"
@@ -18,13 +18,19 @@
       "src": "./icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
