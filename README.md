@@ -36,3 +36,18 @@ JavaScript syntax, embedded image decoding and JSDOM functional tests. Chromium 
 index.html is 20,075,619 bytes (19.15 MiB), below GitHub's documented 25 MiB per-file browser upload limit. Only superseded embedded image payloads were removed from retired collections; all 142 currently displayed image payloads are byte-identical to the previous release. Offline operation, bounded 2x zoom, logging and backups remain available.
 
 Take a JSON backup. Extract this ZIP on your phone. In Chrome, open the existing repository and enable Desktop site if needed. Open the same publishing branch and folder as the existing index.html. Use Add file > Upload files, select the extracted files (including index.html and sw.js), review the changes and commit. Wait for Pages deployment to finish, then reopen the existing app URL. Do not upload the ZIP as the site entry point or clear browser storage.
+
+## Automatic calendar sessions
+The selected workout date automatically determines the session using the active profile's plan, split, configured weekdays, return-phase active slots and A/B rotation. The manual session dropdown is replaced with a read-only assigned-session label.
+Rest days display Rest Day and omit planned strength exercises and the plan warm-up card. Optional core/mobility, added strength exercises, cardio and other non-plan logging remain available and save under the selected date's Rest Day context.
+Save Set never advances the date or session. A Today button returns to the current day. On first activation and on a new local calendar day, the logger defaults to today; selections within the same day are preserved. The app rechecks the day on visibility changes and every minute. Plan Log Session buttons choose the next matching scheduled date within 14 days instead of overriding the date-to-session mapping. Stored workout/session records and initial plan definitions are not rewritten.
+Functional checks: exact 4-day weekday mapping, native date input, bilingual rest-day UI, rest-day optional strength/core logging, custom schedules, return phases, A/B rotations, all 23 split configurations, daily rollover, profile isolation and JSON backup.
+
+## Safari / iOS compatibility repair
+- Application syntax is compiled for Safari 12-era parsers; all bundled data/artwork constants are preserved.
+- Early, offline polyfills cover Array.at, Object.hasOwn, Object.fromEntries, String.replaceAll, Array.flat/flatMap and Blob.text/arrayBuffer.
+- Fixed an experimentally reproduced startup crash when Array.at is missing. Replaced non-standard scroll behavior instant with auto.
+- Startup shows a loading state rather than stale interactive-looking HTML. An independent error handler displays a local diagnostic message if startup or a later action fails. It sends nothing externally and never clears stored data.
+- Existing localStorage keys, profile JSON, images, training schedules and logging behavior are unchanged.
+Validation: reproduced the old missing-Array.at failure; after repair, legacy-API simulation passed navigation, language switching, date-driven sessions, rest-day optional logging, 23 splits, profile isolation, JSON and portable HTML exports. Native-API regression checks and file-read fallback checks passed. This is simulated compatibility testing; no physical iPhone test has been performed.
+Update the ZIP contents, including sw.js, at the existing GitHub Pages location. Keep Safari and installed-app storage. Close and reopen the app after deployment. If an error panel appears, share its screenshot for diagnosis.
