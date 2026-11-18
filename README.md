@@ -51,3 +51,5 @@ Functional checks: exact 4-day weekday mapping, native date input, bilingual res
 - Existing localStorage keys, profile JSON, images, training schedules and logging behavior are unchanged.
 Validation: reproduced the old missing-Array.at failure; after repair, legacy-API simulation passed navigation, language switching, date-driven sessions, rest-day optional logging, 23 splits, profile isolation, JSON and portable HTML exports. Native-API regression checks and file-read fallback checks passed. This is simulated compatibility testing; no physical iPhone test has been performed.
 Update the ZIP contents, including sw.js, at the existing GitHub Pages location. Keep Safari and installed-app storage. Close and reopen the app after deployment. If an error panel appears, share its screenshot for diagnosis.
+
+Startup loading message is English only: AMG Core — Loading…, with left-to-right text. Application language preference is unchanged.
