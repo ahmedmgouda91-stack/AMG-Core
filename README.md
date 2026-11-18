@@ -1,37 +1,80 @@
-# AMG Core — Core & Stability expansion
+# AMG Core | دليل الاستخدام
 
-Single-file offline app plus GitHub Pages PWA deployment files.
+**AMG Core** بيجمع برنامج التمرين وتسجيل المجموعات والكارديو، ومتابعة الجسم والتعافي والتغذية. الدليل ده خاص بملف `AMG_Core.html`، وأسماء الأزرار بالإنجليزي هي اللي هتدور عليها لو الواجهة على **EN**.
 
-## Catalog
-142 unique exercises with embedded images.
-Dedicated Core, Stability & Mobility Tab: 39 movements — 12 mobility, 19 core stability, 6 abs, 2 balance & joint stability.
-Filter the dedicated Tab by category, muscle, Arabic/English name and level (Basic / Intermediate / Advanced). Each movement displays its purpose and level. Levels describe general movement complexity, not an individual clearance or load prescription.
+## ابدأ من هنا
 
-## Newly integrated movements
-CS01 Bear Plank Hold — seconds
-CS02 High Plank Shoulder Taps — reps (one touch = one rep)
-CS03 Farmer’s Carry — seconds (weight field = load per hand)
-CS04 Half-Kneeling Cable Chop — reps per side
-CS05 Half-Kneeling Cable Lift — reps per side
-CS06 Single-Leg Glute Bridge — reps per side
-CS07 Forearm Plank Body Saw — reps (one back-and-forward cycle = one rep)
-CS08 Stability Ball Stir the Pot — reps (one complete circle = one rep)
-BS01 Single-Leg Balance with Reach — reps per side
-BS02 Controlled Step-Down — reps per side
+1. نزّل الملف وافتحه في متصفح حديث يدعم تشغيل HTML. لو الموبايل فتحه كمعاينة من تطبيق الملفات، جرّب **فتح باستخدام** واختر المتصفح لو الخيار متاح.
+2. من الشريط العلوي، استخدم **عربي / EN** لتغيير اللغة، والقائمة لاختيار البروفايل، و**Manage profiles** لإضافة أو تسمية أو حذف بروفايل. اختَر البروفايل قبل ما تسجّل بياناتك.
+3. افتح **البرنامج (Training Plan)**، اختَر التقسيمة وأيام الجلسات. افتح **Nutrition Inputs** لو هتستخدم أهداف السعرات والماكروز، واضغط **Save & Recalculate** بعد إدخال البيانات.
+4. استخدم **سجّل تمرين** في أيام الجيم و**يوميات الأكل** لتسجيل أكلك. على الموبايل، هتلاقي باقي الشاشات تحت **المزيد**.
+5. بعد أول تسجيل، تأكد إنه ظاهر في السجل المناسب، وجرّب تنزيل نسخة **JSON** علشان تعرف مكانها قبل ما تبدأ تعتمد على التطبيق يوميًا.
 
-The supplied PNGs were converted to WebP at original dimensions. Compact movement previews now open in a bounded dialog up to 2x the actual preview width and height, clamped to the viewport. Separate target-muscle anatomy images and atlas are removed; muscle names and filters remain.
+## التدريب
 
-## Logging
-- Optional additional movements: one row per selected movement, + at the end of a row to add another row, Save Set 1/2/3 for repeated sets. Seconds and repetitions stay distinct.
-- Additional strength exercises can be added only to the selected date/session, with an optional superset association. Each exercise has independent set numbers in the standard workout log.
-- Additional records and exercise definitions remain profile/date/plan/split/session scoped and are included in profile/full JSON and portable HTML backups. Original split templates and pre-existing logs are preserved.
+| الشاشة أو العنصر | وظيفته وطريقة استخدامه |
+| --- | --- |
+| **الرئيسية (Home)** | بتعرض جدول الأسبوع، تقدّم المجموعات، توزيع العضلات، آخر التسجيلات ولمحة عن تغيّر الجسم. **ابدأ تسجيل تمرين** يفتح التسجيل، **شوف برنامجك** يفتح التقسيمة، و**توصيات التمرين الجاي** يفتح المدرب. |
+| **البرنامج (Training Plan)** | اختَر عدد الأيام من ٢ إلى ٦ وبعده **Training Split**. افتح **Edit Session Days** لتوزيع الجلسات على أيام الأسبوع. اضغط اسم الجلسة لمراجعة الإحماء، ترتيب التمارين، المجموعات، نطاق العدات، **RIR**، الراحة والبدائل. **سجّل الجلسة** ينقلك لشاشة التسجيل. |
+| **Week Mode / Training Phase** | **Week Mode** يحدد نمط الأسبوع في التقسيمات اللي بتستخدمه، وفي خطط ٣ أيام بالتناوب ممكن يظهر تاريخ بدء **Week A**. **Training Phase** يختار **Full** أو **Return 1 / Return 2**، وده يغيّر وصفة الجلسات اللي بتدعم مرحلة العودة. راجع المعروض قبل بدء التمرين. |
+| **Custom Training Plans** | اضغط **Add Your Custom Training Plan**. اكتب اسم الخطة، وأضف جلسة لكل يوم تدريب، وبداخلها اختَر تمارين من المكتبة وحدد المجموعات، أقل وأعلى عدات، **RIR** ووقت الراحة. **Save and activate plan** يحفظ الخطة ويفعّلها، و**Edit / Activate** لتعديل خطة أو الرجوع إليها. الحد ٣ خطط لكل بروفايل، وبحد أقصى جلسة واحدة لكل يوم في الخطة. |
+| **مكتبة التمارين (Exercise Library)** | ابحث بالاسم أو فلتر بالتصنيف والعضلة، أو افتح **Explore muscle groups** للتصفح بالعضلات. كارت التمرين يعرض العضلات المستهدفة، صورة الحركة القابلة للتكبير، وطريقة الأداء والبدائل والاحتياطات عند توفرها. **Log this movement** ينقلك لمسار تسجيل الحركة. |
+| **الجذع والثبات والمرونة (Core, Stability & Mobility)** | مكتبة لحركات الكور والبطن والمرونة والاتزان، مع فلاتر المستوى والتصنيف والعضلة. تقدر تسجّلها ضمن حركات اليوم الاختيارية، بما فيه يوم الراحة. |
 
+### تسجيل جلسة من البداية للنهاية
 
-## Validation
-JavaScript syntax, embedded image decoding and JSDOM functional tests. Chromium visual testing is unavailable in this runtime.
+1. افتح **سجّل تمرين (Workout Logger)** واضبط التاريخ. التطبيق يعرض الجلسة المرتبطة بالتاريخ حسب التقسيمة وأيامها. في يوم الراحة تقدر تسجّل الكارديو والحركات أو التمارين الإضافية. راجع اسم الجلسة والتاريخ قبل الحفظ.
+2. في **تعافيك قبل التمرين** سجّل نوم الليلة السابقة بالساعات، درجة الإجهاد من ١٠، وهل فيه ألم غير معتاد. لو هتتابع مدة الجلسة، استخدم **Start clock** و**Pause / resume**. **Start rest / Stop rest** لمؤقت الراحة، و**Next exercise** ينقلك للتمرين التالي.
+3. علّم خطوات الإحماء اللي عملتها. لكل مجموعة عمل سجّل الوزن بالكجم، العدات، و**RIR**، يعني عدد العدات اللي كان ممكن تعملها زيادة عند نهاية المجموعة. اختَر الحركة الفعلية لو استخدمت بديلًا، وأضف ملاحظة عند الحاجة. **Use previous weight & reps** يملأ النموذج من تسجيل سابق، فراجع القيم قبل الحفظ. احفظ كل **Set** لوحدها. لو ظهر تسجيل سابق قابل للتعديل، افتحه وعدّل ثم استخدم **Save changes**. استخدم لوحة إضافة تمرين للجلسة لو عايز تسجّل حركة زيادة على البرنامج.
+4. الحركات الختامية الاختيارية ليها تسجيل للعدات أو الزمن. **Warm-up** لوقت الإحماء قبل الحديد، و**Cardio Metrics** للكارديو. تطبيقك يفصل بيانات الحركات دي عن مجموعات عمل الحديد وحجمه.
+5. لو عندك بيانات الساعة، أدخلها يدويًا. **Session Smartwatch Metrics** للجلسة كلها، و**Cardio Metrics** لقراءة الكارديو المنفصلة. املأ اللي قسته من متوسط وأقصى نبض، الحمل، السعرات، المسافة، الخطوات، أو الوقت في مناطق النبض. **Calculate % from times** يحسب نسبة كل منطقة من الأوقات المدخلة. استخدم **Save session reading** أو **Save cardio reading** حسب القراءة. راجع القراءات من الملخص أو سجل الكارديو، و**Delete reading** يحذف القراءة المحددة لما تحتاج.
+6. في **Session Summary** سجّل مدة الإحماء والكارديو، وسرعة وميل المشاية عند استخدامها، والإجهاد والألم والملاحظات. **Save session summary** يحفظ الملخص أثناء العمل، و**Finish session** ينهيها ويختم موقّت الجلسة لو شغّلته. ممكن ينزّل نسخة HTML محدثة حسب إعدادك.
+7. راجع **Session Completion Check** و**Planned vs logged** للتأكد من وجود المجموعات والملخص، ومقارنة التمارين والمجموعات المطلوبة بالمسجل والبدائل المستخدمة. تقدر تراجع ملخص الجلسة وقراءات الساعة من نفس الشاشة.
 
-## Automatic calendar sessions
-The selected workout date automatically determines the session using the active profile's plan, split, configured weekdays, return-phase active slots and A/B rotation. The manual session dropdown is replaced with a read-only assigned-session label.
-Rest days display Rest Day and omit planned strength exercises and the plan warm-up card. Optional core/mobility, added strength exercises, cardio and other non-plan logging remain available and save under the selected date's Rest Day context.
-Save Set never advances the date or session. A Today button returns to the current day. On first activation and on a new local calendar day, the logger defaults to today; selections within the same day are preserved. The app rechecks the day on visibility changes and every minute. Plan Log Session buttons choose the next matching scheduled date within 14 days instead of overriding the date-to-session mapping. Stored workout/session records and initial plan definitions are not rewritten.
-Functional checks: exact 4-day weekday mapping, native date input, bilingual rest-day UI, rest-day optional strength/core logging, custom schedules, return phases, A/B rotations, all 23 split configurations, daily rollover, profile isolation and JSON backup.
+## التغذية
+
+| الشاشة أو العنصر | وظيفته وطريقة استخدامه |
+| --- | --- |
+| **Nutrition Inputs** | سجّل الجنس المستخدم في حساب الحرق الأساسي، الوزن الحالي، الطول والسن. أضف وزن البداية والهدف ونسبة الدهون والعضلات والمياه والدهون الحشوية لو متوفرة. أدخل أيام التمرين والخطوات ونوع العمل وسرعة الهدف وزيادة كارب الجيم. **Macro Profile** يحدد توزيع الماكروز، وخانة **Insulin Resistance Flag** تخص اختيار معامل الحساب. اضغط **Save & Recalculate** واستنى رسالة التأكيد. |
+| **TDEE Source Mode / Overrides** | **Theoretical only** يستخدم تقدير النشاط، **Hybrid** يمزج التقدير النظري مع المرصود لما البيانات تكفي، **Real only** يستخدم المرصود عند توفره، و**Manual Override** يحتاج قيمة حرق يومية موجبة. القيم اليدوية للبروتين والدهون والحد الأدنى للسعرات اختيارية. اكتب نسبة الدهون اليدوية ككسر عشري زي `0.30` لـ٣٠٪، ونسبة دهون الجسم كرقم زي `30`. **Additional safety context** يطبّق قواعد التطبيق للحالات المعروضة. |
+| **Targets Engine** | يعرض مصدر الحرق المستخدم، وتفاصيل التقدير، والسعرات والبروتين والكارب والدهون لأيام التمرين والراحة. لو التقدير الفعلي في حالة انتظار، تابع تسجيل الوزن والأكل المكتمل. معلومات التغطية موجودة في **Long-Term Intelligence**. |
+| **يوميات الأكل (Food Diary)** | اختَر **Date** وراجع **Day type** المعروض. في **Ready meal** ابحث عن صنف، اختَر نوع الوجبة والوحدة والكمية، ثم اضغط حفظ لتسجيل اللي أكلته. الجرامات متاحة لما وزن الحصة معروف. **Add to weekly plan** يضيف لنفس التاريخ في المخطط. لو الصنف مفقود، استخدم **Add / edit food**، وراجع **Today’s entries** للتعديل أو الحذف. |
+| **Build your meal** | اكتب اسم الوجبة ونوعها، وابحث عن مكوّن واضغط **Add ingredient**. لكل مكوّن اختَر الكمية والوحدة المتاحة، واحذف أي سطر زائد. راجع الإجمالي ثم **Save meal to diary** للأكل الفعلي، أو **Add to weekly plan** للتخطيط، أو **Save to my meals** لإعادة الاستخدام. |
+| **Faster food logging / Weight log** | استخدم اختصارات الأكلات المعتادة أو **Copy yesterday’s meals**، وراجع الكميات قبل إغلاق اليوم. سجّل وزنك من **Weight log**. اضغط **Mark complete** بعد تسجيل كل أكل اليوم، علشان التقارير وتقدير الحرق يقدروا يستخدموا بيانات اليوم المكتمل. |
+| **الوصفات والأطعمة (Food & Recipe Library)** | ابحث وفلتر بالفئة، واتصفح الصفحات بـ**Previous / Next**. للقيم المتاحة اختَر **Traditional / Healthy**، واضغط ☆ للمفضلة وℹ لتفاصيل الحصة والمكونات والمصدر. من تفاصيل الوصفة اضبط الحصص والتاريخ ونوع الوجبة، ثم أضف لليوميات أو للخطة. **Show flagged items** يسهّل مراجعة القيم اللي عليها علامة فحص. |
+| **Recipe Builder / Ingredient-Level Nutrition** | في مكتبة الوصفات تقدر تكوّن وصفة شخصية وتحدد **Yield servings**. لو ظهر قسم **Ingredient-Level Nutrition** في تفاصيل وصفة، راجع تطابق كل مكوّن ووحدته وكونه نيّ أو مطبوخ. **Save ingredient mappings** يحفظ اختياراتك، و**Use recalculated recipe macros** يستخدم الحساب المراجع للبروفايل لما المكونات مكتملة. **Restore source macros** يرجّع قيم المصدر. |
+
+### خطة الأكل الأسبوعية
+
+1. افتح **مخطط الوجبات (Weekly Meal Plan)** واختَر الأسبوع اللي بيبدأ السبت. نوع كل يوم بيتحدد من جدول التمرين للبروفايل. اضبط أهدافك أولًا من **Nutrition Inputs**.
+2. **Generate 7 days** يقترح وجبات للأسبوع، و**Recalculate day** يعيد اقتراح الوجبات لليوم المفتوح. قارن إجمالي اليوم بالمستهدف، واضبط الحصص أو أضف من المكتبة أو اليوميات. لو الحصة تخطّت حدود اليوم أو البدائل المتاحة ضيقة، التطبيق يعرض تنبيه.
+3. لكل وجبة **Pin** يثبتها أثناء إعادة التوليد، واضغطه تاني لفك التثبيت. **Swap** يقترح بديلًا لنفس نوع الوجبة لو فيه خيار يناسب المتبقي من الأهداف. **Remove** يحذفها من الخطة، و**Log to diary** يسجلها لما تاكلها فعلًا.
+4. **Weekly shopping list** تجمع مكونات الوجبات المخططة. علّم الأصناف اللي اشتريتها، واستخدم **Copy list** لنسخ الجدول، أو **Delete week** لو عايز تحذف خطة الأسبوع.
+
+## الجسم والتقارير
+
+| الشاشة | بتستخدمها في إيه؟ |
+| --- | --- |
+| **الجسم والكارديو (Body & Cardio)** | **Add measurement** لتسجيل الوزن والخصر والنوم والخطوات والسعرات والبروتين والملاحظات. اختَر مؤشر المنحنى اللي عايز تتابعه. **Add cardio** لتسجيل النشاط والمدّة والإجهاد والسرعة والميل عند استخدام المشاية. |
+| **InBody Center** | سجّل التاريخ والوزن ونسب الدهون والعضلات والمياه والدهون الحشوية حسب تقرير القياس. **إضافة InBody** يحفظ القراءة. راجع منحنيات الوزن وكتلة الدهون والكتلة الخالية من الدهون، وجدول القراءات السابقة وخيارات الحذف المتاحة. |
+| **Body Transformation** | سجل مستقل لقياسات الوزن والخصر والأرداف والصدر والذراع والفخذ ونسبة الدهون والملاحظات. **Save measurement** يحفظ القياس، ومعه صورة تقدّم اختيارية تُخزّن محليًا مع البروفايل. **Measurement history** لمراجعة القياسات والصور. |
+| **المدرب الذكي (Smart Coach)** | اختَر تاريخ الجلسة أو اعرض كل جلسات الخطة. أدخل بيانات التعافي وأصغر زيادة وزن على الجهاز. راجع آخر أداء والحجم والتوصية لكل تمرين. ثبّت ظروف المقارنة قدر الإمكان وطبّق الزيادة يدويًا عند اختيارها. |
+| **تحليل القوة (Strength Analytics)** | **Timeline** يفلتر بالشهور أو **All time**. تبويب **Strength** يقارن الوزن أو العدات للتمرين بين المرجع التاريخي والتسجيلات الجديدة، ويعرض الحجم والأرقام القياسية وتوزيع العضلات. عرض البدائل معًا اختياري، وقارن الأوزان على نفس الجهاز أو نفس نوع الحركة. |
+| **Warm-up & extras / Watch** | في تحليل القوة، **Warm-up & extras** يفتح تقارير الإحماء والختام والكور والمرونة. **Watch** يتابع اتجاه النبض والحمل والسعرات ومناطق النبض ويعرضها جنب الحديد والتعافي لما فيه سجلات كفاية. |
+| **Long-Term Intelligence** | يعرض تغطية الأكل والوزن واتجاه الحرق والأدلة وراء اقتراحات التدريب. التقدير التلقائي يحتاج سجلًا مؤهلًا على نافذة ٢٨ يوم، يشمل ٢١ يوم أكل مكتمل و٨ قياسات وزن على الأقل، منها ٣ على الأقل في كل نصف من الفترة. حالة الأهلية بتظهر بعد فحص تغطية السجل والقيم. |
+| **Weekly Report** | اختَر سبت بداية الأسبوع علشان تشوف الجلسات والمجموعات والحجم وأيام الأكل المكتملة ومتوسطاتها والوزن والتعافي، مع مقارنة بالأسبوع السابق وتفاصيل يوم بيوم. **Export CSV** ينزّل التقرير. |
+| **السجلات (Workout History)** | ابحث باسم التمرين أو الجلسة، وفلتر بين **Workout Log** للتسجيلات و**Historical Baseline** للمرجع التاريخي. تقدر تحذف مجموعاتك القابلة للحذف من هنا وتصدّر **CSV**. جدول **Session summaries** يعرض ملخصات الجلسات. |
+| **Advanced → Periodization Planner** | دفتر تخطيط لدورة تدريب ٤ أو ٨ أسابيع. اختَر تاريخ البداية وعدد الأسابيع واضغط **Save plan** لعرض تسلسل الأسابيع، بما فيه فترات التدرّج أو تخفيف الحمل. راجع قراءات التعافي والحجم في نفس القسم. تعديل جدول التمرين والأحمال يتم من شاشاته المخصصة. |
+
+## الإعدادات والحفظ
+
+- **Settings** فيها التقسيمة والمرحلة وأيام الجلسات، وإعدادات صحية وغذائية مساندة. استخدم **Nutrition Inputs** كمسار تعديل أهداف محرك التغذية. من الإعدادات تقدر تغيّر خيار تنزيل HTML عند إنهاء الجلسة وتفتح **References** لمصادر التمارين والصور.
+- **HTML** يحفظ نسخة تطبيق قابلة للفتح فيها أحدث بياناتك. **JSON** أعلى الشاشة ينزّل نسخة كاملة من البروفايلات. احتفظ بالنسخ خارج بيانات المتصفح، خصوصًا قبل نقل الملف أو مسح بيانات المتصفح.
+- **Export Center** يوفّر **Excel .xlsx**، وملفات **CSV** منفردة أو مجمّعة في **ZIP**، و**Export Profile JSON** للبروفايل الحالي، و**Full app backup** لكل البروفايلات. ملفات الجداول للتقارير، واسترجاع التطبيق عن طريق **JSON**.
+- لنقل مستخدم واحد، افتح **Manage profiles → Backup current profile to JSON**، وفي النسخة المنقول إليها استخدم **Restore Profile Only**. راجع المعاينة ثم أكّد. الاسترجاع يضيف بروفايل جديد.
+- لاسترجاع الكل، نزّل نسخة من البيانات الموجودة حاليًا، ثم من **Export Center → Data Protection & Recovery** اختَر JSON مدعوم، راجع المعاينة واضغط **Restore after confirmation**. استخدم **Undo last restore** لو كان ظاهرًا واحتجت تتراجع عن آخر استرجاع. **Reset web copy** يعيد ضبط بيانات نسخة المتصفح بعد التأكيد، فاستخدمه بعد حفظ نسخة احتياطية.
+- **About** يعرض عدد التقسيمات والتمارين والوجبات والتقارير حسب البيانات الحالية، واختصارات للمكتبات والتقارير والمصادر. الاستخدام الأساسي ممكن أوفلاين. روابط المراجع الخارجية تحتاج اتصال.
+
+**لو حاجة مش ظاهرة بعد الحفظ:** راجع البروفايل والتاريخ والتقسيمة المختارة، واقرأ رسالة الحفظ. لو المتصفح مانع التخزين، جرّب فتح الملف في المتصفح نفسه خارج المعاينة أو الوضع الخاص. لو عندك تغييرات مهمة ظاهرة بالفعل، نزّل نسخة احتياطية قبل الإغلاق.
+
+*A Product of AMG Suite · Designed & Developed by Ahmed Gouda*
