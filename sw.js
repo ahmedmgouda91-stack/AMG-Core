@@ -1,11 +1,11 @@
 /* AMG Core PWA — cache the app shell, not private profile data. */
-const CACHE='amg-core-analytics-20261118-v23';
+const CACHE='amg-core-workout-20261119-v24';
 const SHELL=['./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png'];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting()));
 });
 self.addEventListener('activate',event=>{
-  event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('amg-core-offline-')&&k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()]));
+  event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>(k.startsWith('amg-core-offline-')||k.startsWith('amg-core-analytics-')||k.startsWith('amg-core-workout-'))&&k!==CACHE).map(k=>caches.delete(k)))),self.clients.claim()]));
 });
 self.addEventListener('fetch',event=>{
   if(event.request.method!=='GET'||new URL(event.request.url).origin!==self.location.origin)return;
