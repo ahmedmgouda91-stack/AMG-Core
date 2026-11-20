@@ -236,6 +236,12 @@ html[dir=ltr] .filters{text-align:left}
   padding-block:0 12px;
   margin-top:-4px;
 }
+.core-mobile-icon {
+  display:block;
+  width:24px;
+  height:24px;
+  flex-shrink:0;
+}
 @media (max-width:700px) {
   .mobile-nav.core-mobile-nav { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:2px; padding-inline:4px; }
   .core-mobile-nav button { width:100%; min-width:0; min-height:44px; padding-inline:1px; font-size:clamp(8px,2.6vw,11px); white-space:nowrap; }
@@ -2392,6 +2398,14 @@ ViewComponents.heading = (heading,sub='')=>`<div class="card-head"><div><h2>${he
 ViewComponents.dateLabel = ()=>state.ui.v9Date||today();
 Meals.foodSelect = ()=>`<select id="v9-food" required><option value="">${t('text.choose-a-food-or-recipe')}</option>${ViewComponents.asArray().map(x=>`<option value="${esc(x.id)}">${esc(x.name)} · ${ViewComponents.number(x.kcal)} kcal</option>`).join('')}</select>`;
 const Navigation = (() => {
+  const mobileIconPaths = {
+    today: '<path d="m3 10 9-7 9 7M5 9v12h5v-6h4v6h5V9"/>',
+    training: '<path d="M2 10v4m3-7v10m3-8v6m8-6v6m3-8v10m3-7v4M8 12h8M2 12h3m14 0h3"/>',
+    food: '<circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="3.7"/><path d="M2 4v5a2 2 0 0 0 2 2m0-7v16m2-16v5m16-5c-2 2-2 6-2 8h2m0-8v16"/>',
+    body: '<path d="M20.8 5.7a5.3 5.3 0 0 0-7.5 0L12 7l-1.3-1.3a5.3 5.3 0 0 0-7.5 7.5L12 22l8.8-8.8a5.3 5.3 0 0 0 0-7.5Z"/>',
+    analytics: '<path d="M3 3v18h18M8 16v-4m5 4V8m5 8V5"/>',
+    settings: '<path d="m10 2-.7 2.5-1.6.9-2.5-.7-2 3.5L5 10v2l-1.8 1.8 2 3.5 2.5-.7 1.6.9.7 2.5h4l.7-2.5 1.6-.9 2.5.7 2-3.5L19 12v-2l1.8-1.8-2-3.5-2.5.7-1.6-.9L14 2Z" transform="translate(0 1)"/><circle cx="12" cy="12" r="2.8"/>'
+  };
   const groups = [
     {key:'today', icon:'◫', routes:['home']},
     {key:'training', icon:'⊕', routes:['workout','plan','library','coreHub','period9']},
@@ -2421,8 +2435,10 @@ const Navigation = (() => {
     const active = groupFor(state.ui.page);
     return groups.map(group => {
       const current = group === active;
-      const icon = mobile ? 'i' : 'span';
-      return `<button type="button" data-core-group="${group.key}" data-page="${group.routes[0]}" class="${mobile?'':'nav-btn '}${current?'active':''}" ${current?'aria-current="true"':''}><${icon} class="nav-ico" aria-hidden="true">${group.icon}</${icon}><span>${esc(groupName(group))}</span></button>`;
+      const icon = mobile
+        ? `<svg class="core-mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${mobileIconPaths[group.key]}</svg>`
+        : `<span class="nav-ico" aria-hidden="true">${group.icon}</span>`;
+      return `<button type="button" data-core-group="${group.key}" data-page="${group.routes[0]}" class="${mobile?'':'nav-btn '}${current?'active':''}" ${current?'aria-current="true"':''}>${icon}<span>${esc(groupName(group))}</span></button>`;
     }).join('');
   }
   function button(route, current, label) {
@@ -2449,6 +2465,7 @@ const Navigation = (() => {
   }
   return {normalize, groupFor, groupName, title, groupButtons, subnav, mobileBar, sectionMenu};
 })();
+
 
 // The feature views share one shell. Route IDs remain stable for backups and links.
 const TrainingView = {
