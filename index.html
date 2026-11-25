@@ -5996,6 +5996,594 @@ document.addEventListener('change',event=>{
   value.hidden=value.dataset.trendValue!==event.target.value;
  }
 });
+try{
+const AMG_TIP_SOURCES={
+acsm:{n:'ACSM Position Stand: Resistance Training Prescription (MSSE 2026;58(4):851-872)',u:'https://pmc.ncbi.nlm.nih.gov/articles/PMC12965823/'},
+acsmi:{n:'ACSM 2026 Resistance Training Plan, 5 Things to Know (infographic)',u:'https://www.acsm.org/wp-content/uploads/2026/03/Resistance-Training-Position-Stand-infographic.pdf'},
+issn:{n:'ISSN Position Stand: Protein and Exercise, Jäger et al. (2017)',u:'https://pubmed.ncbi.nlm.nih.gov/28642676/'},
+who:{n:'WHO Guidelines on Physical Activity and Sedentary Behaviour (2020)',u:'https://www.who.int/publications/i/item/9789240015128'},
+acsm09:{n:'ACSM Position Stand: Progression Models in Resistance Training for Healthy Adults (2009)',u:'https://pubmed.ncbi.nlm.nih.gov/19204579/'},
+nsca:{n:'NSCA Foundations of Fitness Programming',u:'https://www.nsca.com/contentassets/8323553f698a466a98220b21d9eb9a65/foundationsoffitnessprogramming_201508.pdf'},
+cdc:{n:'CDC: What Counts as Physical Activity for Adults (2024)',u:'https://www.cdc.gov/physical-activity-basics/adding-adults/what-counts.html'},
+aha:{n:'American Heart Association: Recommendations for Physical Activity in Adults',u:'https://www.heart.org/en/healthy-living/fitness/fitness-basics/aha-recs-for-physical-activity-in-adults'},
+ahan:{n:'American Heart Association News (2021): Is exercise safe?',u:'https://www.heart.org/en/news/2021/12/15/and-just-like-that-everyone-wondered-is-exercise-safe'},
+nih:{n:'NIH Office of Dietary Supplements: Dietary Supplements for Exercise and Athletic Performance (Health Professional Fact Sheet)',u:'https://ods.od.nih.gov/factsheets/ExerciseAndAthleticPerformance-HealthProfessional/'},
+issnnt:{n:'ISSN Position Stand: Nutrient Timing (Kerksick et al., 2017)',u:'https://pubmed.ncbi.nlm.nih.gov/28919842/'},
+issncr:{n:'ISSN Position Stand: Safety and Efficacy of Creatine Supplementation (Kreider et al., 2017)',u:'https://pubmed.ncbi.nlm.nih.gov/28615996/'},
+issncaf:{n:'ISSN Position Stand: Caffeine and Exercise Performance (Guest et al., 2021)',u:'https://pubmed.ncbi.nlm.nih.gov/33388079/'},
+sda1:{n:'Sports Dietitians Australia: What to eat before, during and post exercise',u:'https://sportsdietitians.com.au/fact-sheets/hydration/Article?Action=View&Article_id=6'},
+sda2:{n:'Sports Dietitians Australia: Recovery Nutrition fact sheet',u:'https://sportsdietitians.com.au/Attachment?Action=Download&Attachment_id=347'},
+nata:{n:'NATA Position Statement: Exertional Heat Illnesses (J Athl Train 2015;50(9):986-1000)',u:'https://www.nata.org/sites/default/files/2025-08/exertional_heat_illnesses.pdf'},
+nscas:{n:'NSCA Strength and Conditioning Professional Standards and Guidelines',u:'https://www.nsca.com/globalassets/about/position-statements/nsca_strength_and_conditioning_professional_standards_and_guidelines.pdf'},
+nscay:{n:'NSCA Position Statement: Youth Resistance Training (2009), safety checklist',u:'https://www.nsca.com/globalassets/about/position-statements/position_stand_youth_resistance_training---2009.pdf'},
+walsh:{n:'Walsh et al., Sleep and the athlete: narrative review and 2021 expert consensus recommendations (Br J Sports Med 2021;55:356)',u:'https://pubmed.ncbi.nlm.nih.gov/33144349/'},
+guide:{n:'AMG Core User Guide',u:'https://github.com/ahmedmgouda91-stack/AMG-Core/blob/main/AMG_Core_User_Guide.md'},
+lib:{n:'AMG Core exercise library data (your references)',u:''}
+};
+const AMG_TIPS=[
+// ---- training
+{id:'t01',c:'train',s:['acsmi'],en:'Train every major muscle group at least 2 days a week, then build up gradually.',ar:'درّب كل مجموعات العضلات الكبيرة يومين في الأسبوع على الأقل، وزوّد الحمل بالتدريج.'},
+{id:'t02',c:'train',s:['acsm','acsmi'],en:'The biggest jump in results comes from going from no resistance training to any resistance training. Start, then refine.',ar:'أكبر قفزة في النتائج بتيجي لما تنتقل من صفر تمارين مقاومة لأي تمارين مقاومة. ابدأ الأول وبعدين حسّن.'},
+{id:'t03',c:'train',s:['acsmi'],en:'The best plan is the one you will actually do. Pick a routine that fits your schedule and comfort level.',ar:'أحسن خطة هي اللي هتلتزم بيها فعلًا. اختار روتين يناسب مواعيدك وراحتك.'},
+{id:'t04',c:'train',s:['acsmi'],en:'Complicated does not mean better. Keep it simple and focus on showing up regularly.',ar:'التعقيد مش معناه نتيجة أحسن. خليها بسيطة وركّز إنك تيجي بانتظام.'},
+{id:'t05',c:'train',s:['acsmi'],en:'You do not need a gym. Bodyweight, elastic bands and home training are effective options.',ar:'مش لازم جيم. تمارين وزن الجسم والأستيك والتمرين في البيت كلها خيارات فعّالة.'},
+{id:'t06',c:'train',s:['acsmi'],en:'Training to momentary muscle failure did not consistently change results for the average healthy adult. You do not have to grind every set to the limit.',ar:'التمرين لحد الفشل العضلي ما غيّرش النتائج بشكل ثابت للشخص السليم العادي. مش لازم توصل للحد في كل مجموعة.'},
+{id:'t07',c:'train',s:['acsmi'],en:'Machines versus free weights did not consistently change results. Choose what you can perform well and safely.',ar:'الأجهزة مقابل الأوزان الحرة ما فرقتش بشكل ثابت في النتائج. اختار اللي تقدر تؤديه صح وبأمان.'},
+{id:'t08',c:'train',s:['acsmi'],en:'Complex periodization did not consistently change results either. A steady plan you follow beats an elaborate one you skip.',ar:'التقسيم المعقّد للحمل (periodization) برضه ما غيّرش النتائج بشكل ثابت. خطة ثابتة بتلتزم بيها أحسن من خطة معقدة بتسيبها.'},
+{id:'t09',c:'train',s:['acsmi'],en:'For strength, lift heavier loads (around 80% of your one-rep max or more) for 2 to 3 sets per exercise.',ar:'لو هدفك القوة، ارفع أوزان أتقل (حوالي 80% أو أكتر من أقصى وزن تقدر ترفعه مرة واحدة 1RM) في 2 لـ 3 مجموعات لكل تمرين.'},
+{id:'t10',c:'train',s:['acsmi'],en:'For muscle growth, aim for higher weekly volume: about 10 sets per muscle group per week. It is guidance, not a universal minimum.',ar:'لو هدفك التضخيم، ارفع الحجم الأسبوعي: حوالي 10 مجموعات لكل مجموعة عضلية في الأسبوع. ده إرشاد مش حد أدنى ثابت للكل.'},
+{id:'t11',c:'train',s:['acsmi'],en:'For power, use moderate loads (30 to 70% of 1RM) and move as fast as possible on the lifting phase.',ar:'لو هدفك القدرة (Power)، استخدم أوزان متوسطة (30 لـ 70% من 1RM، أقصى وزن لمرة واحدة) وحرّك الوزن بأسرع ما يمكن في مرحلة الرفع.'},
+{id:'t13',c:'train',s:['acsmi'],en:'Same tools, different settings: change sets, load and volume to match what you want most, strength, size or power.',ar:'نفس الأدوات بإعدادات مختلفة: غيّر المجموعات والوزن والحجم حسب اللي عايزه أكتر، قوة أو حجم أو قدرة.'},
+{id:'t14',c:'train',s:['acsmi'],en:'Consistency beats perfection. A missed session is fine, the next one is what counts.',ar:'الانتظام أهم من الكمال. لو فاتتك حصة عادي، المهم اللي بعدها.'},
+{id:'t15',c:'general',s:['who'],en:'Besides lifting, build up toward 150 to 300 minutes a week of moderate activity, plus muscle strengthening.',ar:'غير الحديد، ابني تدريجيًا لحد 150 لـ 300 دقيقة نشاط متوسط في الأسبوع، مع تمارين تقوية العضلات.'},
+{id:'t17',c:'train',s:['acsm09'],en:'Progress based on how you actually adapt. Add load or reps when the current ones feel manageable, not on a fixed date.',ar:'تقدّم حسب تأقلمك الفعلي. زوّد الوزن أو العدّات لما الحالي يبقى مريح، مش بتاريخ ثابت.'},
+{id:'t16',c:'general',s:['who'],en:'WHO advises muscle-strengthening activities for all major muscle groups on 2 or more days a week.',ar:'منظمة الصحة العالمية بتنصح بتمارين تقوية لكل العضلات الكبيرة في يومين أو أكتر في الأسبوع.'},
+// ---- nutrition
+{id:'n01',c:'nutrition',s:['issn'],en:'Common protein guidance for active adults is about 1.4 to 2.0 g per kg of body weight per day.',ar:'الإرشاد الشائع للبالغين النشطين هو بروتين حوالي 1.4 لـ 2.0 جرام لكل كيلو من وزن الجسم يوميًا.'},
+{id:'n02',c:'nutrition',s:['issn'],en:'Quick math: at 80 kg, 1.4 to 2.0 g per kg is about 112 to 160 g of protein a day. Use your own weight.',ar:'حسبة سريعة: لو وزنك 80 كجم، يبقى 1.4 لـ 2.0 جم لكل كيلو = حوالي 112 لـ 160 جم بروتين في اليوم. استخدم وزنك أنت.'},
+{id:'n03',c:'nutrition',s:['issn'],en:'Higher protein can help during an energy deficit (cutting). Treat 1.4 to 2.0 g per kg as the general range for active adults.',ar:'بروتين أعلى ممكن يفيد وقت العجز في السعرات (التنشيف). اعتبر 1.4 لـ 2.0 جم لكل كيلو هو النطاق العام للنشطين.'},
+{id:'n05',c:'app',s:['guide'],en:'Enter your details in Food > Nutrition Inputs and tap Save & Recalculate so your targets match your current numbers.',ar:'اكتب بياناتك في الأكل ← مدخلات التغذية واضغط حفظ وإعادة الحساب، عشان أهدافك تتحدث على أرقامك الحالية.'},
+{id:'n06',c:'app',s:['guide'],en:'Where both versions exist, the Traditional / Healthy menu next to a recipe lets you compare them. Check the Serving column before you log.',ar:'لو فيه نسختين للوصفة، قائمة تقليدية / صحية جنب اسم الوصفة بتخليك تقارن. اقرأ عمود الحصة قبل ما تسجّل.'},
+{id:'n07',c:'app',s:['guide'],en:'Use the Weekly Meal Plan to generate the week and copy the shopping list. Planning ahead makes the diary easier to follow.',ar:'استخدم خطة الوجبات الأسبوعية عشان تولّد الأسبوع وتنسخ قائمة المشتريات. التخطيط قبلها بيسهّل الالتزام باليوميات.'},
+// ---- watch out
+{id:'w01',c:'watch',s:['nata'],en:'Training in the heat? Acclimatize gradually over 7 to 14 days by building up intensity and duration step by step.',ar:'هتتمرن في الحر؟ خلّي جسمك يتأقلم تدريجيًا على 7 لـ 14 يوم، وزوّد الشدة والمدة خطوة خطوة.'},
+{id:'w02',c:'watch',s:['nata'],en:'The aim of drinking during exercise is to avoid losing more than 2% of your body weight in a session, and to keep your morning urine light in color.',ar:'الهدف من شرب المية أثناء التمرين إنك ما تخسرش أكتر من 2% من وزن جسمك في الجلسة، وإن لون بولك الصبح يفضل فاتح.'},
+{id:'w03',c:'watch',s:['nata'],en:'Heat effects add up. Sleep at least 7 hours a night in a cool room, eat a balanced diet, and hydrate before, during and after training.',ar:'تأثير الحر بيتراكم. نام 7 ساعات على الأقل في مكان بارد، وكُل متوازن، واشرب قبل التمرين وأثناءه وبعده.'},
+{id:'w04',c:'watch',s:['nata'],en:'In hot or humid weather, plan rest breaks in the shade and leave enough time to drink.',ar:'في الجو الحر أو الرطب، خطّط لفترات راحة في الضل وسيب وقت كفاية تشرب فيه.'},
+{id:'w05',c:'watch',s:['nata'],en:'Dizziness, confusion, odd behavior, poor coordination or collapse during exercise in the heat are signs of heat illness. Stop, move to a cool place and get medical help.',ar:'الدوخة أو التشوش أو تصرفات غريبة أو ضعف التوازن أو الإغماء أثناء التمرين في الحر علامات على إجهاد حراري. وقّف، روح مكان بارد واطلب مساعدة طبية.'},
+{id:'w06',c:'watch',s:['nata'],en:'For a cramp caused by muscle overload or fatigue, rest and gently stretch the cramping muscle until it eases.',ar:'لو التقلص سببه إجهاد العضلة أو التعب، ارتاح وطوّل العضلة بهدوء لحد ما يروح.'},
+{id:'w07',c:'watch',s:['nscas'],en:'Technique and safety come first. NSCA says proper technique, movement mechanics and safety should be emphasized to minimize injury risk.',ar:'التكنيك والأمان الأول. الـNSCA بتقول لازم نركز على التكنيك الصحيح وميكانيكا الحركة والسلامة عشان نقلل خطر الإصابة.'},
+{id:'w08',c:'watch',s:['nscay'],en:'NSCA safety checklist: use collars correctly, spot properly, handle barbells, dumbbells and plates with care, and start with sensible weights.',ar:'قائمة أمان الـNSCA: استخدم الكولارات صح، اعمل سبوت صح، تعامل بحرص مع البار والدمبل والأقراص، وابدأ بأوزان معقولة.'},
+{id:'w09',c:'watch',s:['ahan'],en:'Chest pain, or shortness of breath beyond what is normal for that effort, is a sign to slow down or stop.',ar:'ألم في الصدر أو ضيق نفس أكتر من المعتاد لنفس المجهود علامة إنك تبطّئ أو توقف.'},
+{id:'w10',c:'watch',s:['ahan'],en:'If you have heart problems, asthma or diabetes, check with your doctor before starting a new exercise routine.',ar:'لو عندك مشاكل في القلب أو ربو أو سكر، استشير دكتورك قبل ما تبدأ روتين تمرين جديد.'},
+// ---- nutrition (ISSN, NIH, SDA)
+{id:'n10',c:'nutrition',s:['issnnt'],en:'Hitting your total daily protein matters most, and it is best spread across evenly spaced meals, roughly every 3 hours.',ar:'أهم حاجة إنك توصل لإجمالي البروتين اليومي، والأفضل توزعه على وجبات متباعدة بالتساوي، تقريبًا كل 3 ساعات.'},
+{id:'n11',c:'nutrition',s:['issnnt'],en:'A 20 to 40 g dose of high-quality protein (0.25 to 0.40 g per kg) every 3 to 4 hours appears to work best for muscle protein synthesis. At 80 kg that is about 20 to 32 g.',ar:'جرعة 20 لـ 40 جم بروتين عالي الجودة (0.25 لـ 0.40 جم لكل كيلو) كل 3 لـ 4 ساعات يبدو إنها الأنسب لبناء بروتين العضلات. لو وزنك 80 كجم يبقى حوالي 20 لـ 32 جم.'},
+{id:'n12',c:'nutrition',s:['issnnt'],en:'High-quality protein eaten from right after training up to 2 hours after stimulates a strong rise in muscle protein synthesis.',ar:'بروتين عالي الجودة بعد التمرين مباشرة ولحد ساعتين بعده بيحفّز بناء بروتين العضلات بشكل قوي.'},
+{id:'n13',c:'nutrition',s:['issnnt'],en:'The size and timing of your pre-workout meal can change how much you need to eat after training.',ar:'حجم وجبة ما قبل التمرين وتوقيتها ممكن يغيّروا احتياجك من الأكل بعد التمرين.'},
+{id:'n14',c:'nutrition',s:['nih'],en:'A nutritionally adequate diet and enough fluids are critical for performing at your best.',ar:'الأكل المتكامل غذائيًا والسوائل الكافية أساسيين عشان تؤدي بأفضل مستوى.'},
+{id:'n15',c:'nutrition',s:['nih'],en:'NIH lists what athletes need daily: enough calories and fluids, carbohydrate (typically 3 to 10 g per kg), protein (1.2 to 2.0 g per kg), fat (20 to 35% of calories), and vitamins and minerals.',ar:'الـNIH بتحدد احتياج الرياضي يوميًا: سعرات وسوائل كفاية، كربوهيدرات (عادة 3 لـ 10 جم لكل كيلو)، بروتين (1.2 لـ 2.0 جم لكل كيلو)، دهون (20 لـ 35% من السعرات)، وفيتامينات ومعادن.'},
+{id:'n16',c:'nutrition',s:['nih'],en:'NIH reports no safety concerns for athletes eating protein up to about 2.0 g per kg of body weight a day.',ar:'الـNIH بتقول مفيش مخاوف أمان للرياضيين عند بروتين لحد حوالي 2.0 جم لكل كيلو من وزن الجسم يوميًا.'},
+{id:'n17',c:'nutrition',s:['sda2'],en:'A protein-rich snack or meal after training (about 15 to 30 g, depending on body size) boosts the muscle-building signals from your session.',ar:'سناك أو وجبة غنية بالبروتين بعد التمرين (حوالي 15 لـ 30 جم حسب حجم الجسم) بتقوّي إشارات بناء العضلات من التمرين.'},
+{id:'n18',c:'nutrition',s:['sda2'],en:'Exercise keeps protein metabolism raised for up to 24 to 48 hours, so include protein in meals and snacks throughout that window.',ar:'التمرين بيفضّل رافع معدل أيض البروتين لحد 24 لـ 48 ساعة، فحط بروتين في وجباتك وسناكس اليوم كله.'},
+{id:'n19',c:'nutrition',s:['sda1'],en:'Before training, choose familiar foods that are high in carbohydrate and low in fat. Test timings and snacks in training, not on competition day.',ar:'قبل التمرين اختار أكل متعوّد عليه، عالي في الكربوهيدرات وقليل الدهون. جرّب التوقيتات والسناكس في التمرين مش يوم المنافسة.'},
+{id:'n20',c:'nutrition',s:['sda1'],en:'Start exercise well hydrated.',ar:'ابدأ التمرين وجسمك مترطب كويس.'},
+{id:'n21',c:'nutrition',s:['sda2'],en:'Recovery nutrition has four goals: refuel, repair, rehydrate and revitalize. It should be individualized to your session and the time until your next one.',ar:'تغذية الاستشفاء ليها أربع أهداف: تعويض الوقود، الإصلاح، الترطيب، والتنشيط. وتتظبط على جلستك والوقت لحد الجلسة الجاية.'},
+// ---- recovery and sleep (PubMed, ISSN)
+{id:'r01',c:'recovery',s:['walsh'],en:'Athletes are prone to habitual short sleep (under 7 hours a night) and poor sleep quality, so protect your sleep on purpose.',ar:'الرياضيين معرّضين لنوم قليل بشكل معتاد (أقل من 7 ساعات في الليلة) وجودة نوم ضعيفة، فاحمي نومك بقصد.'},
+{id:'r02',c:'recovery',s:['walsh'],en:'Athletic performance drops after a night or more without sleep.',ar:'الأداء الرياضي بيقل بعد ليلة أو أكتر من غير نوم.'},
+{id:'r03',c:'recovery',s:['walsh'],en:'In the wider population, habitually sleeping under 7 hours a night raises the chance of respiratory infection.',ar:'في عموم الناس، النوم أقل من 7 ساعات في الليلة بشكل معتاد بيزوّد احتمال الإصابة بعدوى الجهاز التنفسي.'},
+{id:'r04',c:'recovery',s:['walsh'],en:'Training, travel, competition, stress and anxiety can all disturb sleep. Knowing your own triggers is the first step.',ar:'التمرين والسفر والمنافسة والتوتر والقلق كلهم ممكن يبوّظوا النوم. معرفة اللي بيأثر عليك أنت أول خطوة.'},
+{id:'r05',c:'recovery',s:['walsh'],en:'The sleep expert consensus recommends an individualized approach that takes your own perceived sleep needs into account.',ar:'إجماع الخبراء على النوم بيوصي بأسلوب شخصي بياخد في الاعتبار احتياجك أنت من النوم زي ما بتحسه.'},
+{id:'r06',c:'recovery',s:['issnnt'],en:'Eating before and/or after training (carbohydrate plus protein, or protein alone) can be an effective way to support strength gains and body composition.',ar:'الأكل قبل و/أو بعد التمرين (كربوهيدرات مع بروتين أو بروتين لوحده) ممكن يدعم زيادة القوة وتحسين تركيب الجسم.'},
+// ---- supplements (NIH, ISSN)
+{id:'s01',c:'supps',s:['nih'],en:'Many sports supplements mix several ingredients, but most research tests one at a time. The effect and safety of a combination can only be known if that exact combination was studied, and amounts vary widely between products.',ar:'كتير من مكملات الرياضة فيها مكونات متعددة، بس أغلب الأبحاث بتختبر مكوّن واحد. تأثير وأمان الخليط ما ينفعش يتعرف إلا لو الخليط ده بالذات اتدرس، والكميات بتختلف جدًا بين المنتجات.'},
+{id:'s02',c:'supps',s:['nih'],en:'Creatine: many trials generally show a benefit for high-intensity, intermittent activity, though individual responses vary. It is of little value for endurance sports.',ar:'الكرياتين: تجارب كتير بتوضح فايدة للنشاط عالي الشدة المتقطع، مع اختلاف في استجابة كل شخص. وفايدته قليلة في رياضات التحمل.'},
+{id:'s03',c:'supps',s:['issncr'],en:'Creatine monohydrate is the most studied form. Claims that other forms are absorbed better or work better are currently unfounded.',ar:'كرياتين مونوهيدرات هو أكتر شكل اتدرس. الادعاءات إن الأشكال التانية بتتمتص أحسن أو بتشتغل أحسن مالهاش دليل حاليًا.'},
+{id:'s04',c:'supps',s:['issncr','nih'],en:'The only consistently reported side effect of creatine is weight gain, linked to water retention.',ar:'العرض الجانبي الوحيد المتكرر للكرياتين هو زيادة الوزن، وبيرتبط باحتباس المية.'},
+{id:'s05',c:'supps',s:['issncr','nih'],en:'A typical creatine dose is 3 to 5 g a day. NIH reports few safety concerns at that dose for up to 12 weeks.',ar:'الجرعة المعتادة من الكرياتين 3 لـ 5 جم يوميًا. والـNIH بتقول مخاوف الأمان قليلة عند الجرعة دي لحد 12 أسبوع.'},
+{id:'s06',c:'supps',s:['issncr'],en:'Vegetarians tend to have lower muscle creatine stores, so they may see bigger gains from supplementing.',ar:'النباتيين غالبًا مخزون الكرياتين في عضلاتهم أقل، فممكن يستفيدوا أكتر من المكمل.'},
+{id:'s07',c:'supps',s:['issncaf'],en:'Caffeine has consistently improved performance at 3 to 6 mg per kg of body weight. The smallest effective dose may be as low as 2 mg per kg.',ar:'الكافيين حسّن الأداء بشكل ثابت عند 3 لـ 6 مجم لكل كيلو من وزن الجسم. وأقل جرعة فعّالة ممكن تكون حوالي 2 مجم لكل كيلو.'},
+{id:'s08',c:'supps',s:['issncaf'],en:'Very high caffeine doses (around 9 mg per kg) bring many side effects and are not needed for a benefit. Side effects rise with the dose.',ar:'جرعات الكافيين العالية جدًا (حوالي 9 مجم لكل كيلو) آثارها الجانبية كتير ومش لازمة للاستفادة. والآثار بتزيد مع زيادة الجرعة.'},
+{id:'s09',c:'supps',s:['issncaf'],en:'The most commonly used timing for caffeine is about 60 minutes before exercise.',ar:'أشهر توقيت لاستخدام الكافيين هو حوالي 60 دقيقة قبل التمرين.'},
+{id:'s10',c:'supps',s:['nih'],en:'NIH considers caffeine reasonably safe up to 400 to 500 mg a day for adults. Side effects include insomnia, restlessness, nausea and a racing heart.',ar:'الـNIH بتعتبر الكافيين آمن بدرجة معقولة لحد 400 لـ 500 مجم يوميًا للبالغين. وآثاره الجانبية: أرق، توتر، غثيان، وسرعة ضربات القلب.'},
+{id:'s11',c:'supps',s:['nih'],en:'BCAA supplements have not consistently been shown to build muscle or improve recovery. Complete protein foods already supply BCAAs.',ar:'مكملات الـBCAA ما اتثبتش بشكل ثابت إنها بتبني عضل أو بتحسّن الاستشفاء. والأكل البروتيني الكامل بيوفّر الـBCAA أصلًا.'},
+{id:'s12',c:'supps',s:['nih'],en:'NIH found no evidence of benefit for strength or muscle from deer antler velvet or Tribulus terrestris.',ar:'الـNIH ما لقتش دليل على فايدة في القوة أو العضل من قرن الغزال (Deer antler velvet) أو التريبيولوس.'},
+// ---- general guidance (CDC, AHA, WHO)
+{id:'g01',c:'general',s:['cdc'],en:'Aim for 150 minutes of moderate activity or 75 minutes of vigorous activity a week, or an equal mix. You can spread it out, for example 30 minutes a day, 5 days a week.',ar:'استهدف 150 دقيقة نشاط متوسط أو 75 دقيقة نشاط شديد في الأسبوع، أو خليط متساوي. تقدر توزعها، مثلًا 30 دقيقة يوميًا 5 أيام.'},
+{id:'g02',c:'general',s:['cdc'],en:'Talk test: at moderate intensity you can talk but not sing. At vigorous intensity you cannot say more than a few words without a breath.',ar:'اختبار الكلام: في الشدة المتوسطة تقدر تتكلم بس مش تغني. في الشدة العالية ما تقدرش تقول كذا كلمة من غير ما تاخد نفس.'},
+{id:'g03',c:'general',s:['cdc'],en:'As a rule of thumb, 1 minute of vigorous activity counts about the same as 2 minutes of moderate activity.',ar:'قاعدة تقريبية: دقيقة نشاط شديد تعادل حوالي دقيقتين نشاط متوسط.'},
+{id:'g04',c:'general',s:['cdc'],en:'Muscle-strengthening works best when it covers all major muscle groups: legs, hips, back, chest, abdomen, shoulders and arms.',ar:'تمارين تقوية العضلات أفضل لما تغطي كل العضلات الكبيرة: الرجلين، الحوض، الظهر، الصدر، البطن، الكتف، والذراعين.'},
+{id:'g05',c:'general',s:['cdc'],en:'Work until it is hard to do another repetition without help. 8 to 12 reps is one set. Do at least one set per activity, and two or three for more benefit.',ar:'اشتغل لحد ما يبقى صعب تعمل تكرار تاني من غير مساعدة. 8 لـ 12 تكرار = مجموعة. اعمل مجموعة على الأقل لكل تمرين، واتنين أو تلاتة لفايدة أكتر.'},
+{id:'g06',c:'general',s:['cdc'],en:'Fitness differs between people. A brisk walk can feel moderate to you and vigorous to someone else. Do what is right for your own ability.',ar:'اللياقة بتختلف من شخص لشخص. المشي السريع ممكن يحسّه واحد متوسط وواحد تاني شديد. اعمل اللي يناسب قدرتك أنت.'},
+{id:'g07',c:'general',s:['cdc'],en:'If you have a history of chronic disease, tell your doctor before you increase your activity, especially before moving to more vigorous activity.',ar:'لو عندك تاريخ مرض مزمن، قول لدكتورك قبل ما تزوّد نشاطك، خصوصًا قبل ما تنتقل لنشاط أشد.'},
+{id:'g08',c:'general',s:['aha'],en:'Sit less. Even light activity can offset some of the risks of being sedentary.',ar:'قلّل قعدتك. حتى النشاط الخفيف ممكن يعوّض جزء من مخاطر الخمول.'},
+{id:'g09',c:'general',s:['aha'],en:'Being active at least 300 minutes a week (5 hours) gives even more benefits.',ar:'لو نشاطك 300 دقيقة في الأسبوع (5 ساعات) على الأقل، هتاخد فوايد أكتر.'},
+{id:'g10',c:'general',s:['aha'],en:'Increase the amount and intensity of activity gradually over time.',ar:'زوّد كمية النشاط وشدته بالتدريج مع الوقت.'},
+// ---- app use
+{id:'a01',c:'app',s:['guide'],en:'Choose a plan: Training > Plan, set your body goal, priority, days and minutes, then tap Update recommendations.',ar:'اختار خطتك: التمرين ← خطة التدريب، حدد هدف الجسم والأولوية والأيام والدقائق، واضغط حدّث الترشيحات.'},
+{id:'a02',c:'app',s:['guide'],en:'Short on time or missing equipment? Open "Adapt to time and equipment" in the Workout Log, preview the session, then use it today.',ar:'وقتك قليل أو الأجهزة مش متاحة؟ افتح "كيّف الجلسة حسب الوقت والأجهزة" في سجل التمرين، عاين الجلسة واستخدمها النهارده.'},
+{id:'a03',c:'app',s:['guide'],en:'Check off your warm-up steps before you lift. They are listed in the Workout Log.',ar:'علّم على خطوات الإحماء قبل ما ترفع. هتلاقيها في سجل التمرين.'},
+{id:'a04',c:'app',s:['guide'],en:'The rest timer sits next to the save button and starts with the exercise\u2019s planned rest. For a manual rest, type the seconds and tap Start rest.',ar:'مؤقت الراحة جنب زر الحفظ وبيبدأ بالراحة المحددة للتمرين. للراحة اليدوية اكتب الثواني واضغط ابدأ الراحة.'},
+{id:'a05',c:'app',s:['guide'],en:'Tap Finish Session when you are done. It stops the session clock and saves the summary.',ar:'اضغط إنهاء الجلسة لما تخلص. بتوقف عداد الجلسة وتحفظ الملخص.'},
+{id:'a06',c:'app',s:['guide'],en:'Need to move a workout? Use Reschedule the week, pick the session and an open date, preview the move, then save it.',ar:'محتاج تنقل تمرين؟ استخدم إعادة ترتيب الأسبوع، اختار الجلسة ويوم فاضي، عاين النقل وبعدين احفظه.'},
+{id:'a07',c:'app',s:['guide'],en:'Super Sets: open Choose a Super Set in the Workout Log, pick a pair, set rounds and rest, then log A1 and A2 in turn.',ar:'السوبر سِت: افتح اختار سوبر سِت في سجل التمرين، اختار زوج وحدد الجولات والراحة، وسجّل A1 ثم A2 بالترتيب.'},
+{id:'a08',c:'app',s:['guide'],en:'You can import your own plans and exercises from an Excel or CSV template in the Training Plan or Exercise Library pages.',ar:'تقدر تستورد خططك وتمارينك من نموذج Excel أو CSV في صفحة البرنامج أو مكتبة التمارين.'},
+{id:'a09',c:'app',s:['guide'],en:'In Analytics > Workout Performance, use the month filter to focus on the period you care about.',ar:'في التحليلات ← أداء التمرين، استخدم فلتر الشهور عشان تركّز على الفترة اللي تهمك.'},
+{id:'a10',c:'app',s:['guide'],en:'The Weekly Review gives one suggested next step with its reason. If it fits you, tap Add to next week.',ar:'مراجعة الأسبوع بتديك اقتراح واحد مع سببه. لو ناسبك اضغط أضف للأسبوع الجاي.'},
+{id:'a11',c:'app',s:['guide'],en:'Daily check-in: log your sleep and stress when it appears. The app may offer to lighten or move a session, and the decision is yours.',ar:'تسجيل اليوم: سجّل نومك وإجهادك لما يظهر. التطبيق ممكن يقترح تخفيف أو نقل جلسة والقرار ليك.'},
+{id:'a12',c:'app',s:['guide'],en:'Tap BACKUP PROFILE and keep the JSON file outside the browser before moving the app or clearing site data. Restore it from Settings > Export & Backup.',ar:'اضغط نسخة احتياطية للبروفايل واحفظ ملف JSON برّه المتصفح قبل ما تنقل التطبيق أو تمسح بيانات الموقع. الاسترجاع من الإعدادات ← التصدير والنسخ الاحتياطي.'},
+{id:'a13',c:'app',s:['guide'],en:'Change the look under Settings > App Settings > Appearance: Standard, Light Crimson, Monochrome or Soft Rose.',ar:'غيّر الشكل من الإعدادات ← App Settings ← Appearance: Standard أو Light Crimson أو Monochrome أو Soft Rose.'}
+];
+const AMG_HINTS={
+home:{s:['guide'],en:'The six sections are Today, Training, Food, Body, Analytics and Settings. They are in the bottom bar on phones and the sidebar on larger screens.',ar:'الأقسام الستة: اليوم، التمرين، الأكل، الجسم، التحليلات، الإعدادات. تحت على الموبايل وعلى الجانب في الشاشات الكبيرة.'},
+plan:{s:['guide'],en:'Pick your body goal and priority, enter days and minutes, tap Update recommendations, choose a template, then Apply plan and conditioning.',ar:'اختار هدف الجسم والأولوية واكتب الأيام والدقائق، اضغط حدّث الترشيحات، اختار قالب، وبعدين اعتمد الخطة والتعديلات.'},
+workout:{s:['guide'],en:'Check your warm-up, enter load and reps, tap Save Set after each set, and tap Finish Session at the end.',ar:'علّم على الإحماء، اكتب الوزن والعدّات، اضغط احفظ المجموعة بعد كل مجموعة، وإنهاء الجلسة في الآخر.'},
+library:{s:['guide','lib'],en:'Each card has a technique section and now a form cue with a watch-out. You can also import your own exercises from a template.',ar:'كل كارت فيه قسم التكنيك وبقى فيه كمان نصيحة أداء وتنبيه. وتقدر تستورد تمارينك من نموذج.'},
+diary:{s:['guide'],en:'Start with Nutrition Inputs and Save & Recalculate, then log meals in the Food Diary.',ar:'ابدأ بمدخلات التغذية وحفظ وإعادة الحساب، وبعدها سجّل وجباتك في يوميات الأكل.'},
+strength:{s:['guide'],en:'Use the month filter to focus on a period. Every point on the trend charts has its real recording date.',ar:'استخدم فلتر الشهور عشان تركّز على فترة. كل نقطة في الرسوم ليها تاريخ تسجيلها الفعلي.'},
+settings:{s:['guide'],en:'Back up your profile to a JSON file kept outside the browser before moving the app or clearing site data.',ar:'اعمل نسخة احتياطية للبروفايل في ملف JSON برّه المتصفح قبل ما تنقل التطبيق أو تمسح بيانات الموقع.'}
+};
+const AMG_HINT_ROUTE={home:'home',plan:'plan',workout:'workout',library:'library',diary:'diary',recipes:'diary',planner:'diary',inputs:'diary',strength:'strength',settings:'settings',export91:'settings'};
+
+/* ===== AMG Tips & Hints (added module; fully guarded, never throws into the app) ===== */
+const AMGTips=(()=>{
+const KEY='AMG_TIPS_HINTS_V1';
+let tab='all';
+const lang=()=>state.language==='en'?'en':'ar';
+const L=o=>o[lang()]||o.en;
+const E=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function store(){try{return Object.assign({seen:{},off:false,shift:{}},JSON.parse(localStorage.getItem(KEY)||'{}'));}catch(e){return {seen:{},off:false,shift:{}};}}
+function put(o){try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+const T={
+ title:{ar:'نصائح وإرشادات',en:'Tips & Hints'},
+ daily:{ar:'نصيحة اليوم',en:'Tip of the day'},
+ another:{ar:'نصيحة تانية',en:'Another tip'},
+ all:{ar:'كل النصائح',en:'All tips'},
+ tabs:{all:{ar:'الكل',en:'All'},train:{ar:'نصيحة أداء',en:'Training'},watch:{ar:'خلّي بالك',en:'Watch out'},nutrition:{ar:'التغذية',en:'Nutrition'},recovery:{ar:'الاستشفاء والنوم',en:'Recovery & sleep'},supps:{ar:'المكملات',en:'Supplements'},general:{ar:'إرشادات عامة',en:'General guidance'},app:{ar:'استخدام التطبيق',en:'Using the app'}},
+ src:{ar:'المصدر',en:'Source'},
+ gotit:{ar:'فهمت',en:'Got it'},
+ never:{ar:'متظهرش تاني',en:"Don't show again"},
+ hint:{ar:'إرشاد سريع',en:'Quick hint'},
+ hintsOn:{ar:'الإرشادات للمستخدم الجديد',en:'First-time hints'},
+ hintsReset:{ar:'اعرض الإرشادات من جديد',en:'Show hints again'},
+ sources:{ar:'المصادر',en:'Sources'},
+ srcNote:{ar:'كل نصيحة مربوطة بمصدرها. النصايح العلمية من مواقف علمية منشورة، وإرشادات التطبيق من دليل الاستخدام بتاعك.',en:'Every tip is linked to its source. Training and nutrition tips come from published position stands and guidelines, app hints from your own User Guide.'},
+ formcue:{ar:'نصيحة أداء',en:'Form cue'},
+ watch:{ar:'تنبيه',en:'Watch out'},
+ count:{ar:'نصيحة',en:'tips'}
+};
+function srcLinks(ids){return ids.map(id=>{const s=AMG_TIP_SOURCES[id];if(!s)return'';return s.u?`<a href="${E(s.u)}" target="_blank" rel="noopener noreferrer">${E(s.n)}</a>`:E(s.n);}).filter(Boolean).join(' · ');}
+function dayNum(){const d=new Date();return Math.floor(new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime()/864e5);}
+const pool=()=>AMG_TIPS.filter(x=>x.c!=='app');
+function dailyTip(){const p=pool(),st=store(),k=String(dayNum()),sh=Number(st.shift[k]||0);return p[(dayNum()*5+sh)%p.length];}
+function tipCard(x,extra){return `<article class="card amg-tip" data-amg-tipid="${x.id}"><div class="row-between"><span class="pill">${E(L(T.tabs[x.c]))}</span></div><p class="amg-tip-text">${E(L(x))}</p><p class="tiny amg-tip-src">${E(L(T.src))}: ${srcLinks(x.s)}</p>${extra||''}</article>`;}
+function dailyCard(){const x=dailyTip();return `<section class="card amg-daily" id="amg-daily"><div class="row-between"><div><div class="eyebrow">${E(L(T.daily))}</div></div><span class="pill">${E(L(T.tabs[x.c]))}</span></div><p class="amg-tip-text">${E(L(x))}</p><p class="tiny amg-tip-src">${E(L(T.src))}: ${srcLinks(x.s)}</p><div class="row mt" style="gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-secondary btn-sm" data-amg-another="1">${E(L(T.another))}</button><button type="button" class="btn btn-ghost btn-sm" data-page="tips">${E(L(T.all))}</button></div></section>`;}
+function page(){
+ const st=store(),list=AMG_TIPS.filter(x=>tab==='all'||x.c===tab);
+ const tabs=['all','train','watch','nutrition','recovery','supps','general','app'].map(k=>`<button type="button" class="btn btn-sm ${tab===k?'btn-primary':'btn-secondary'}" data-amg-tab="${k}">${E(L(T.tabs[k]))}${k==='all'?'':' ('+AMG_TIPS.filter(x=>x.c===k).length+')'}</button>`).join('');
+ const used=[...new Set(AMG_TIPS.flatMap(x=>x.s).concat(Object.values(AMG_HINTS).flatMap(h=>h.s)))];
+ const srcList=used.map(id=>AMG_TIP_SOURCES[id]).map(s=>s.u?`<li><a href="${E(s.u)}" target="_blank" rel="noopener noreferrer">${E(s.n)}</a></li>`:`<li>${E(s.n)}</li>`).join('');
+ return `<div class="stack">${dailyCard()}<section class="card"><div class="row-between"><h2>${E(L(T.title))}</h2><span class="pill pill-green">${list.length} ${E(L(T.count))}</span></div><div class="row mt" style="gap:8px;flex-wrap:wrap">${tabs}</div></section><div class="grid-eq amg-tips-grid">${list.map(x=>tipCard(x)).join('')}</div><section class="card"><h3>${E(L(T.hintsOn))}</h3><p class="sub">${st.off?'OFF':'ON'}</p><button type="button" class="btn btn-secondary btn-sm" data-amg-hints-reset="1">${E(L(T.hintsReset))}</button></section><section class="card"><h3>${E(L(T.sources))}</h3><p class="sub">${E(L(T.srcNote))}</p><ul class="amg-src-list">${srcList}</ul></section></div>`;
+}
+function hintBanner(route){
+ const id=AMG_HINT_ROUTE[route],h=id&&AMG_HINTS[id],st=store();
+ if(!h||st.off||st.seen[id])return'';
+ return `<section class="card amg-hint" data-amg-hint="${id}"><div class="eyebrow">💡 ${E(L(T.hint))}</div><p class="amg-tip-text">${E(L(h))}</p><p class="tiny amg-tip-src">${E(L(T.src))}: ${srcLinks(h.s)}</p><div class="row mt" style="gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-primary btn-sm" data-amg-hint-ok="${id}">${E(L(T.gotit))}</button><button type="button" class="btn btn-ghost btn-sm" data-amg-hint-off="1">${E(L(T.never))}</button></div></section>`;
+}
+function formBlock(e){
+ const ar=lang()==='ar';
+ const OV={'Barbell Back Squat':'اجلس للأسفل بين الوركين حتى عمق متحكم فيه ثم قم عبر منتصف القدم','Goblet Squat':'انزل في السكوات بين الركبتين ثم قم عبر منتصف القدم','Hack Squat':'انزل بتحكم إلى عمق خالٍ من الألم ثم ادفع عبر منتصف القدم','Seated Dumbbell Overhead Extension':'أنزل الدمبل خلف الرأس بثني المرفقين ثم افردهما مع ثبات الجذع','Barbell Romanian Deadlift':'ادفع الحوض للخلف مع بقاء البار قريبًا من الساقين، ثم قم بفرد الحوض'};
+ const tr=x=>{if(!ar||!x)return x;try{return translateVisibleText(x)||x;}catch(_){return x;}};const exe=ar?(OV[e.name]||e.executionAr||tr(e.execution)):e.execution,saf=ar?(e.safetyAr||tr(e.safety)):e.safety;
+ if(!exe&&!saf)return'';
+ const ref=e.reference?`<a href="${E(e.reference)}" target="_blank" rel="noopener noreferrer">${E(/acsm/i.test(e.reference)?'ACSM Position Stand 2026':/nsca/i.test(e.reference)?'NSCA Foundations of Fitness Programming':e.reference)}</a>`:E(AMG_TIP_SOURCES.lib.n);
+ const strip=x=>String(x).replace(/[.。]\s*$/,'');
+ return `<div class="amg-form-tip">${exe?`<p><b>💡 ${E(L(T.formcue))}:</b> ${E(strip(exe))}</p>`:''}${saf?`<p><b>⚠ ${E(L(T.watch))}:</b> ${E(strip(saf))}</p>`:''}<p class="tiny">${E(L(T.src))}: ${ref}</p></div>`;
+}
+function afterRender(){
+ const root=document.getElementById('root');if(!root)return;
+ const main=root.querySelector('main.workspace');if(!main)return;
+ root.querySelectorAll('.amg-daily:not(.amg-on-tips),.amg-hint,.amg-form-tip-host').forEach(n=>{if(!n.closest('.amg-tips-page'))n.remove();});
+ const route=state.ui.page;
+ // anchor: after topbar + sub navigation
+ let anchor=main.querySelector('header.topbar');
+ while(anchor&&anchor.nextElementSibling&&/^NAV$/.test(anchor.nextElementSibling.tagName))anchor=anchor.nextElementSibling;
+ if(anchor&&route!=='tips'){
+  let html='';
+  if(route==='home')html+=dailyCard();
+  html+=hintBanner(route);
+  if(html)anchor.insertAdjacentHTML('afterend',html);
+ }
+ if(route==='workout'){
+  try{
+   const cat=exerciseCatalog(),rows=rowsBySession(state.ui.session)||[];
+   main.querySelectorAll('article.exercise[id^="exercise-"]').forEach(card=>{
+    if(card.querySelector('.amg-form-tip'))return;
+    const idx=Number(card.id.slice(9));const row=rows[idx];if(!row)return;
+    const names=[row._adaptedActual,row.exercise].filter(Boolean);
+    let e=null;for(const nm of names){e=cat.find(x=>x.name===nm);if(!e){try{const c=ExerciseLibrary.canonicalName(nm);e=cat.find(x=>x.name===c);}catch(_){}}if(e)break;}
+    if(!e)return;
+    const html=formBlock(e);if(!html)return;
+    const info=card.querySelector('.exercise-info');
+    if(info)info.insertAdjacentHTML('afterend',html);else card.querySelector('.exercise-head')?.insertAdjacentHTML('afterend',html);
+   });
+  }catch(err){console.warn('AMG tips workout',err);}
+ }
+ if(route==='library'){
+  const cat=exerciseCatalog();
+  main.querySelectorAll('.v924-library-card[data-exercise]').forEach(card=>{
+   if(card.querySelector('.amg-form-tip'))return;
+   const name=card.getAttribute('data-exercise');const e=cat.find(x=>x.name===name);if(!e)return;
+   const html=formBlock(e);if(!html)return;
+   const d=card.querySelector('details.details');
+   if(d)d.insertAdjacentHTML('beforebegin',html);else card.insertAdjacentHTML('beforeend',html);
+  });
+ }
+}
+function bind(){
+ document.addEventListener('click',ev=>{
+  try{
+   const b=ev.target.closest&&ev.target.closest('[data-amg-another],[data-amg-tab],[data-amg-hint-ok],[data-amg-hint-off],[data-amg-hints-reset]');
+   if(!b)return;
+   ev.preventDefault();ev.stopPropagation();
+   const st=store();
+   if(b.hasAttribute('data-amg-another')){const k=String(dayNum());st.shift[k]=Number(st.shift[k]||0)+1;put(st);const el=document.getElementById('amg-daily');if(el)el.outerHTML=dailyCard();return;}
+   if(b.hasAttribute('data-amg-tab')){tab=b.getAttribute('data-amg-tab');render();return;}
+   if(b.hasAttribute('data-amg-hint-ok')){st.seen[b.getAttribute('data-amg-hint-ok')]=1;put(st);const n=b.closest('.amg-hint');if(n)n.remove();return;}
+   if(b.hasAttribute('data-amg-hint-off')){st.off=true;put(st);const n=b.closest('.amg-hint');if(n)n.remove();return;}
+   if(b.hasAttribute('data-amg-hints-reset')){st.off=false;st.seen={};put(st);render();return;}
+  }catch(e){console.warn('AMG tips',e);}
+ },true);
+}
+// route + render wiring
+const grp=Navigation.groupFor('workout');
+if(grp&&Array.isArray(grp.routes)&&!grp.routes.includes('tips'))grp.routes.push('tips');
+AppPages.tips=()=>`<div class="amg-tips-page">${page()}</div>`;
+const _title=Navigation.title;
+Navigation.title=r=>r==='tips'?L(T.title):_title(r);
+const fixLabel=h=>typeof h==='string'?h.split('>page.tips<').join('>'+E(L(T.title))+'<'):h;
+const _sub=Navigation.subnav;Navigation.subnav=function(){return fixLabel(_sub.apply(this,arguments));};
+const _menu=Navigation.sectionMenu;Navigation.sectionMenu=function(){return fixLabel(_menu.apply(this,arguments));};
+const css=document.createElement('style');css.id='amg-tips-style';
+css.textContent='.amg-tip-text{font-size:15px;line-height:1.8;margin:10px 0}.amg-tip-src{line-height:1.7;word-break:break-word}.amg-hint,.amg-daily{border-inline-start:3px solid var(--accent)}.amg-form-tip{margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--panel2);border:1px solid var(--stroke)}.amg-form-tip p{margin:6px 0;line-height:1.7}.amg-src-list{line-height:1.9;padding-inline-start:20px;margin:8px 0 0}';
+document.head.appendChild(css);
+bind();
+const _render=render;
+render=function(){const r=_render.apply(this,arguments);try{afterRender();}catch(e){console.warn('AMG tips',e);}return r;};
+return {page,dailyTip};
+})();
+
+/* AMG Core: Progress & records page (strength progression, personal records, consistency heatmap, weekly muscle volume).
+   Read-only: it only reads state.workouts, the profile baseline, sessions and the food log. It never writes to app data. */
+const AMG_INSIGHTS=(()=>{
+const KEY='AMG_INSIGHTS_V1';
+const lang=()=>state.language==='en'?'en':'ar';
+const L=o=>o[lang()]||o.en;
+const E=x=>esc(String(x==null?'':x));
+const T={
+ title:{ar:'التقدم والأرقام القياسية',en:'Progress & records'},
+ sub:{ar:'كل الأرقام هنا محسوبة من اللي سجلته في التطبيق، من غير ما يتغير أي حاجة في بياناتك.',en:'Every number here is calculated from what you logged in the app. Nothing in your data is changed.'},
+ tabs:{strength:{ar:'تقدم القوة',en:'Strength progress'},records:{ar:'أرقامي القياسية',en:'Personal records'},heat:{ar:'الالتزام',en:'Consistency'},volume:{ar:'حجم العضلات',en:'Muscle volume'}},
+ pickEx:{ar:'التمرين',en:'Exercise'},range:{ar:'المدة',en:'Range'},
+ weeks:{ar:n=>n+' أسابيع',en:n=>n+' weeks'},all:{ar:'الكل',en:'All'},
+ heaviest:{ar:'أثقل وزن في الأسبوع (كجم)',en:'Heaviest weight per week (kg)'},
+ volume:{ar:'الحجم الأسبوعي (وزن × تكرارات، كجم)',en:'Weekly volume (weight × reps, kg)'},
+ noData:{ar:'لسه مفيش مجموعات متسجلة هنا. أول ما تسجل تمرينك هتظهر الرسوم.',en:'No logged sets here yet. Charts appear as soon as you log your workouts.'},
+ first:{ar:'أول وزن',en:'First'},latest:{ar:'أحدث وزن',en:'Latest'},best:{ar:'الأفضل',en:'Best'},change:{ar:'التغيير',en:'Change'},
+ sessionsN:{ar:n=>n+' أسبوع تمرين',en:n=>n+' training weeks'},
+ setsN:{ar:n=>n+' مجموعة',en:n=>n+' sets'},
+ recTitle:{ar:'أرقامك القياسية لكل تمرين',en:'Your personal records per exercise'},
+ recNote:{ar:'الوزن الأثقل هو أعلى وزن سجلته. أقصى وزن تقديري لمرة واحدة محسوب بمعادلة Epley (وزن × (1 + تكرارات ÷ 30)) وهو تقدير مش قياس فعلي. أعلى حجم مجموعة = وزن × تكرارات.',en:'Heaviest weight is the highest weight you logged. The estimated one-rep max uses the Epley formula (weight × (1 + reps ÷ 30)); it is an estimate, not a tested lift. Best set volume = weight × reps.'},
+ heavy:{ar:'أثقل وزن',en:'Heaviest'},e1:{ar:'أقصى وزن تقديري لمرة',en:'Est. 1RM'},bestVol:{ar:'أعلى حجم مجموعة',en:'Best set volume'},
+ repsW:{ar:(r)=>r+' تكرار',en:(r)=>r+' reps'},
+ newPr:{ar:'رقم جديد',en:'New'},
+ celebTitle:{ar:'🎉 كسرت رقم قياسي!',en:'🎉 New personal record!'},
+ celebLine:{ar:(n,w,p)=>n+': '+w+' كجم (الرقم السابق '+p+' كجم)',en:(n,w,p)=>n+': '+w+' kg (previous best '+p+' kg)'},
+ celebSub:{ar:'آخر 7 أيام. شغل جامد، كمّل.',en:'Last 7 days. Strong work, keep going.'},
+ showAll:{ar:'اعرض كل التمارين',en:'Show all exercises'},showLess:{ar:'اعرض أقل',en:'Show less'},
+ heatTitle:{ar:'خريطة الالتزام',en:'Consistency heatmap'},
+ modes:{work:{ar:'التمرين',en:'Workouts'},food:{ar:'الأكل',en:'Food log'},both:{ar:'الاتنين',en:'Both'}},
+ hr:{m6:{ar:'6 شهور',en:'6 months'},m12:{ar:'سنة',en:'1 year'}},
+ legendLess:{ar:'أقل',en:'Less'},legendMore:{ar:'أكتر',en:'More'},
+ lgWork:{ar:'تمرين',en:'Workout'},lgFood:{ar:'أكل',en:'Food log'},lgBoth:{ar:'الاتنين',en:'Both'},
+ workDays:{ar:'أيام التمرين',en:'Workout days'},foodDays:{ar:'أيام تسجيل الأكل',en:'Food-log days'},
+ streakNow:{ar:'السلسلة الحالية',en:'Current streak'},streakBest:{ar:'أطول سلسلة',en:'Longest streak'},
+ dayN:{ar:n=>n+' يوم',en:n=>n+(n===1?' day':' days')},
+ tipDay:{ar:(d,s,f)=>d+': '+s+' مجموعة، '+f+' وجبة مسجلة',en:(d,s,f)=>d+': '+s+' sets, '+f+' food entries'},
+ volTitle:{ar:'حجم العضلات في الأسبوع',en:'Weekly muscle volume'},
+ volNote:{ar:'المجموعات متحسبة على العضلة الأساسية للتمرين في مكتبة التمارين. الأسبوع بيبدأ من السبت.',en:'Sets are counted on each exercise\'s primary muscle in the exercise library. The week starts on Saturday.'},
+ thisWeek:{ar:'الأسبوع ده',en:'This week'},
+ prev:{ar:'‹ الأسبوع اللي فات',en:'‹ Previous week'},next:{ar:'الأسبوع الجاي ›',en:'Next week ›'},
+ weekOf:{ar:d=>'أسبوع بيبدأ '+d,en:d=>'Week starting '+d},
+ sets:{ar:'مجموعات',en:'sets'},kg:{ar:'كجم',en:'kg'},
+ vsPrev:{ar:'مقارنة بالأسبوع اللي قبله',en:'vs previous week'},
+ totalSets:{ar:'إجمالي المجموعات',en:'Total sets'},totalVol:{ar:'إجمالي الحجم',en:'Total volume'},
+ noWeek:{ar:'مفيش تمارين متسجلة في الأسبوع ده.',en:'No workouts logged this week.'},
+ unknownMuscle:{ar:'غير محدد',en:'Unspecified'}
+};
+const ui={tab:'strength',ex:'',range:12,hm:'both',hmr:26,off:0,all:false};
+const loadK=()=>{try{const o=JSON.parse(localStorage.getItem(KEY)||'{}');return o&&typeof o==='object'?o:{};}catch(e){return{};}};
+const saveK=o=>{try{localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}};
+const addDays=(d,n)=>{const x=new Date(d+'T12:00:00');x.setDate(x.getDate()+n);return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0');};
+const loc=()=>lang()==='en'?'en-GB':'ar-EG';
+const shortD=d=>{const q=new Date(d+'T12:00:00');return Number.isFinite(q.getTime())?q.toLocaleDateString(loc(),{day:'numeric',month:'short'}):d;};
+const longD=d=>{try{return dateFmt(d);}catch(e){return d;}};
+const monthD=d=>{const q=new Date(d+'T12:00:00');return q.toLocaleDateString(loc(),{month:'short'});};
+const n2=x=>Number.isFinite(x)?Number(x).toLocaleString('en-US',{maximumFractionDigits:1}):'—';
+
+// ---------- data (read only) ----------
+let _cat=null;
+function muscleOf(name,row){
+ if(row&&row.muscle)return String(row.muscle);
+ if(!_cat){_cat=new Map();try{exerciseCatalog().forEach(e=>_cat.set(ExerciseLibrary.canonicalName(e.name),e.muscle));}catch(e){}}
+ return _cat.get(name)||'';
+}
+function allSets(){
+ const out=[];
+ const take=(x,src)=>{
+  if(!x||typeof x!=='object')return;
+  const date=x.date;if(typeof date!=='string'||dateMs(date)===null)return;
+  const w=Number(x.weight),r=Number(x.reps);
+  if(!(Number.isFinite(w)&&w>0&&Number.isFinite(r)&&r>=1))return;
+  let name=x.actualExercise||x.exercise;if(!name)return;
+  try{name=ExerciseLibrary.canonicalName(name)||name;}catch(e){}
+  out.push({date,name,w,r,vol:w*r,muscle:muscleOf(name,x),src});
+ };
+ try{(profileBaseline()||[]).forEach(x=>take(x,'b'));}catch(e){}
+ (Array.isArray(state.workouts)?state.workouts:[]).forEach(x=>take(x,'w'));
+ return out;
+}
+const exName=n=>{try{return exerciseLabel(n)||n;}catch(e){return n;}};
+const muName=m=>m?ExerciseLibrary.localeMuscle(m):L(T.unknownMuscle);
+function workDaysMap(){
+ const m=new Map();
+ allSets().forEach(s=>m.set(s.date,(m.get(s.date)||0)+1));
+ try{(state.sessions||[]).forEach(x=>{if(x&&typeof x.date==='string'&&!m.has(x.date)&&dateMs(x.date)!==null)m.set(x.date,0.5);});}catch(e){}
+ return m;
+}
+function foodDaysMap(){
+ const m=new Map();
+ try{(state.v9.foodLog||[]).forEach(x=>{if(x&&typeof x.date==='string'&&dateMs(x.date)!==null)m.set(x.date,(m.get(x.date)||0)+1);});}catch(e){}
+ return m;
+}
+
+// ---------- charts ----------
+function svgLine(vals,labels,color,fmtY){
+ const W=340,H=150,pl=38,pr=8,pt=10,pb=22,n=vals.length;
+ const pts=vals.map((v,i)=>v==null?null:{i,v}).filter(Boolean);
+ if(!pts.length)return '';
+ let lo=Math.min(...pts.map(p=>p.v)),hi=Math.max(...pts.map(p=>p.v));
+ if(hi===lo){hi+=1;lo=Math.max(0,lo-1);}
+ const pad=(hi-lo)*.1;lo=Math.max(0,lo-pad);hi+=pad;
+ const X=i=>pl+(n<=1?(W-pl-pr)/2:i*(W-pl-pr)/(n-1)),Y=v=>pt+(hi-v)*(H-pt-pb)/(hi-lo);
+ const path=pts.map((p,k)=>(k?'L':'M')+X(p.i).toFixed(1)+' '+Y(p.v).toFixed(1)).join(' ');
+ let g='';
+ for(let k=0;k<=2;k++){const v=lo+(hi-lo)*k/2,y=Y(v);g+=`<line x1="${pl}" x2="${W-pr}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--stroke)" stroke-width="1"/><text x="${pl-5}" y="${(y+3).toFixed(1)}" text-anchor="end" fill="var(--muted)" font-size="9">${E(fmtY(v))}</text>`;}
+ const dots=pts.map(p=>`<circle cx="${X(p.i).toFixed(1)}" cy="${Y(p.v).toFixed(1)}" r="3" fill="${color}"><title>${E(labels[p.i])}: ${E(fmtY(p.v))}</title></circle>`).join('');
+ const xl=`<text x="${pl}" y="${H-6}" fill="var(--muted)" font-size="9">${E(labels[0])}</text><text x="${W-pr}" y="${H-6}" text-anchor="end" fill="var(--muted)" font-size="9">${E(labels[n-1])}</text>`;
+ return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="chart" style="display:block;direction:ltr">${g}<path d="${path}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round"/>${dots}${xl}</svg>`;
+}
+function svgBars(vals,labels,color,fmtY){
+ const W=340,H=150,pl=38,pr=8,pt=10,pb=22,n=vals.length;
+ const hi=Math.max(1,...vals);
+ const bw=(W-pl-pr)/n,Y=v=>pt+(hi-v)*(H-pt-pb)/hi;
+ let g='';
+ for(let k=0;k<=2;k++){const v=hi*k/2,y=Y(v);g+=`<line x1="${pl}" x2="${W-pr}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--stroke)" stroke-width="1"/><text x="${pl-5}" y="${(y+3).toFixed(1)}" text-anchor="end" fill="var(--muted)" font-size="9">${E(fmtY(v))}</text>`;}
+ const bars=vals.map((v,i)=>v>0?`<rect x="${(pl+i*bw+bw*.15).toFixed(1)}" y="${Y(v).toFixed(1)}" width="${(bw*.7).toFixed(1)}" height="${(H-pb-Y(v)).toFixed(1)}" rx="2" fill="${color}"><title>${E(labels[i])}: ${E(fmtY(v))}</title></rect>`:'').join('');
+ const xl=`<text x="${pl}" y="${H-6}" fill="var(--muted)" font-size="9">${E(labels[0])}</text><text x="${W-pr}" y="${H-6}" text-anchor="end" fill="var(--muted)" font-size="9">${E(labels[n-1])}</text>`;
+ return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="chart" style="display:block;direction:ltr">${g}${bars}${xl}</svg>`;
+}
+const kfmt=v=>v>=10000?(v/1000).toFixed(0)+'k':v>=1000?(v/1000).toFixed(1)+'k':String(Math.round(v*10)/10);
+
+// ---------- tab 1: strength progression ----------
+function exerciseList(sets){
+ const m=new Map();
+ sets.forEach(s=>{const o=m.get(s.name)||{name:s.name,weeks:new Set(),n:0};o.weeks.add(startSat(s.date));o.n++;m.set(s.name,o);});
+ return [...m.values()].sort((a,b)=>b.weeks.size-a.weeks.size||b.n-a.n);
+}
+function weeksBetween(a,b){const out=[];for(let d=a;d<=b;d=addDays(d,7))out.push(d);return out;}
+function strengthTab(sets){
+ const list=exerciseList(sets);
+ if(!list.length)return `<div class="card"><p class="sub">${E(L(T.noData))}</p></div>`;
+ if(!list.some(x=>x.name===ui.ex))ui.ex=list[0].name;
+ const mine=sets.filter(s=>s.name===ui.ex);
+ const thisWk=startSat(today());
+ let first=startSat(mine.reduce((a,s)=>s.date<a?s.date:a,mine[0].date));
+ if(ui.range>0){const f=addDays(thisWk,-7*(ui.range-1));if(f>first)first=f;}
+ let last=startSat(mine.reduce((a,s)=>s.date>a?s.date:a,mine[0].date));
+ if(last<thisWk&&ui.range>0)last=thisWk;
+ const wk=weeksBetween(first,last);
+ const maxW=new Map(),vol=new Map();
+ mine.forEach(s=>{const k=startSat(s.date);if(k<first||k>last)return;maxW.set(k,Math.max(maxW.get(k)||0,s.w));vol.set(k,(vol.get(k)||0)+s.vol);});
+ const wv=wk.map(k=>maxW.has(k)?maxW.get(k):null),vv=wk.map(k=>vol.get(k)||0),lb=wk.map(shortD);
+ const have=wv.filter(v=>v!=null);
+ const ex=list.find(x=>x.name===ui.ex);
+ let sum='';
+ if(have.length){
+  const f=have[0],l=have[have.length-1],b=Math.max(...have),ch=l-f,pc=f>0?Math.round(ch/f*100):0;
+  sum=`<div class="grid-3 mt"><div><div class="tiny">${E(L(T.first))}</div><b>${n2(f)} ${E(L(T.kg))}</b></div><div><div class="tiny">${E(L(T.latest))}</div><b>${n2(l)} ${E(L(T.kg))}</b></div><div><div class="tiny">${E(L(T.best))}</div><b>${n2(b)} ${E(L(T.kg))}</b></div></div><p class="tiny mt">${E(L(T.change))}: <bdi>${ch>0?'+':''}${n2(ch)} ${E(L(T.kg))} (${ch>0?'+':''}${pc}%)</bdi> · ${E(L(T.sessionsN)(ex.weeks.size))} · ${E(L(T.setsN)(ex.n))}</p>`;
+ }
+ const opts=list.map(x=>`<option value="${E(x.name)}"${x.name===ui.ex?' selected':''}>${E(exName(x.name))}</option>`).join('');
+ const rg=[[8,L(T.weeks)(8)],[12,L(T.weeks)(12)],[26,L(T.weeks)(26)],[0,L(T.all)]].map(([v,t_])=>`<option value="${v}"${v===ui.range?' selected':''}>${E(t_)}</option>`).join('');
+ return `<div class="card"><div class="form-grid two"><div><label>${E(L(T.pickEx))}</label><select data-amgi-sel="ex">${opts}</select></div><div><label>${E(L(T.range))}</label><select data-amgi-sel="range">${rg}</select></div></div>${sum}</div>
+ <div class="card mt"><h3>${E(L(T.heaviest))}</h3>${svgLine(wv,lb,'var(--accent2)',n2)}</div>
+ <div class="card mt"><h3>${E(L(T.volume))}</h3>${svgBars(vv,lb,'var(--blue)',kfmt)}</div>`;
+}
+
+// ---------- tab 2: personal records ----------
+function records(sets){
+ const by=new Map();
+ sets.forEach(s=>{const a=by.get(s.name)||[];a.push(s);by.set(s.name,a);});
+ const out=[];
+ by.forEach((arr,name)=>{
+  let h=null,e=null,v=null;
+  arr.forEach(s=>{
+   if(!h||s.w>h.w||(s.w===h.w&&s.date>h.date))h=s;
+   const e1=s.w*(1+s.r/30);const ec=s.r<=12?e1:0;
+   if(ec&&(!e||ec>e.e1||(ec===e.e1&&s.date>e.date)))e={...s,e1:ec};
+   if(!v||s.vol>v.vol||(s.vol===v.vol&&s.date>v.date))v=s;
+  });
+  // previous best before the record date, to tell a broken record from a first entry
+  const before=arr.filter(s=>s.date<h.date);
+  const prev=before.length?Math.max(...before.map(s=>s.w)):null;
+  out.push({name,h,e,v,prev,isNew:prev!=null&&h.w>prev&&h.date>=addDays(today(),-7)&&h.date<=today()});
+ });
+ return out.sort((a,b)=>b.h.date.localeCompare(a.h.date)||a.name.localeCompare(b.name));
+}
+function celebrate(newOnes){
+ const k=loadK();k.cel=k.cel||{};
+ const fresh=newOnes.filter(r=>!k.cel[r.name+'|'+r.h.date+'|'+r.h.w]);
+ if(!fresh.length)return '';
+ // marked after the first render so it plays once per record
+ setTimeout(()=>{try{const kk=loadK();kk.cel=kk.cel||{};fresh.forEach(r=>kk.cel[r.name+'|'+r.h.date+'|'+r.h.w]=1);const keys=Object.keys(kk.cel);if(keys.length>200)keys.slice(0,keys.length-200).forEach(x=>delete kk.cel[x]);saveK(kk);}catch(e){}},1500);
+ let c='';const em=['🎉','✨','🏆','💪','🔥'];
+ for(let i=0;i<16;i++)c+=`<span style="left:${(i*6.2+3).toFixed(1)}%;animation-delay:${(i%8*0.12).toFixed(2)}s">${em[i%em.length]}</span>`;
+ return `<div class="amgi-confetti" aria-hidden="true">${c}</div>`;
+}
+function recordsTab(sets){
+ const recs=records(sets);
+ if(!recs.length)return `<div class="card"><p class="sub">${E(L(T.noData))}</p></div>`;
+ const news=recs.filter(r=>r.isNew);
+ let banner='';
+ if(news.length){
+  banner=`<div class="card amgi-banner">${celebrate(news)}<h3>${E(L(T.celebTitle))}</h3>`+news.map(r=>`<p><b>${E(L(T.celebLine)(exName(r.name),n2(r.h.w),n2(r.prev)))}</b></p>`).join('')+`<p class="tiny">${E(L(T.celebSub))}</p></div>`;
+ }
+ const shown=ui.all?recs:recs.slice(0,12);
+ const rows=shown.map(r=>`<div class="card mt amgi-rec"><div class="row-between"><h3 class="ltr">${E(exName(r.name))}</h3>${r.isNew?`<span class="pill pill-green">🎉 ${E(L(T.newPr))}</span>`:''}</div>
+  <div class="amgi-recgrid"><div><div class="tiny">${E(L(T.heavy))}</div><b>${n2(r.h.w)} ${E(L(T.kg))}</b><div class="tiny">${E(L(T.repsW)(r.h.r))} · ${E(shortD(r.h.date))}</div></div>
+  <div><div class="tiny">${E(L(T.e1))}</div><b>${r.e?n2(r.e.e1)+' '+E(L(T.kg)):'—'}</b><div class="tiny">${r.e?E(shortD(r.e.date)):''}</div></div>
+  <div><div class="tiny">${E(L(T.bestVol))}</div><b>${n2(r.v.vol)} ${E(L(T.kg))}</b><div class="tiny">${n2(r.v.w)}×${r.v.r} · ${E(shortD(r.v.date))}</div></div></div></div>`).join('');
+ const more=recs.length>12?`<button type="button" class="btn btn-secondary mt" data-amgi="showall">${E(ui.all?L(T.showLess):L(T.showAll)+' ('+recs.length+')')}</button>`:'';
+ return `${banner}<div class="card mt"><h3>${E(L(T.recTitle))}</h3><p class="tiny">${E(L(T.recNote))}</p></div>${rows}${more}`;
+}
+
+// ---------- tab 3: consistency heatmap ----------
+function streaks(map,minV){
+ const has=d=>(map.get(d)||0)>=minV;
+ const days=[...map.keys()].filter(d=>has(d)).sort();
+ let best=0,run=0,prev=null;
+ days.forEach(d=>{run=(prev&&addDays(prev,1)===d)?run+1:1;if(run>best)best=run;prev=d;});
+ let cur=0,d=today();if(!has(d))d=addDays(d,-1);
+ while(has(d)){cur++;d=addDays(d,-1);}
+ return {cur,best};
+}
+function lvl(n,kind){
+ if(!(n>0))return 0;
+ if(kind==='work')return n<6?1:n<13?2:n<21?3:4;
+ return n<3?1:n<5?2:n<8?3:4;
+}
+function heatTab(){
+ const wm=workDaysMap(),fm=foodDaysMap();
+ const weeks=ui.hmr,end=today(),start=addDays(startSat(end),-7*(weeks-1));
+ const mode=ui.hm;
+ let cells='',months='',lastM='';
+ const col=[];
+ for(let w=0;w<weeks;w++){
+  const ws=addDays(start,7*w);const m=monthD(ws);
+  col.push(m!==lastM?m:'');lastM=m;
+ }
+ months=col.map(x=>`<span>${E(x)}</span>`).join('');
+ let wd=0,fd=0;
+ for(let w=0;w<weeks;w++)for(let d=0;d<7;d++){
+  const day=addDays(start,7*w+d);
+  if(day>end){cells+='<i class="amgi-c amgi-x"></i>';continue;}
+  const a=wm.get(day)||0,f=fm.get(day)||0;
+  if(a>0)wd++;if(f>0)fd++;
+  let cls='amgi-c';
+  if(mode==='work'&&a>0)cls+=' w'+lvl(a,'work');
+  else if(mode==='food'&&f>0)cls+=' f'+lvl(f,'food');
+  else if(mode==='both'){if(a>0&&f>0)cls+=' b';else if(a>0)cls+=' w'+Math.max(2,lvl(a,'work'));else if(f>0)cls+=' f'+Math.max(2,lvl(f,'food'));}
+  cells+=`<i class="${cls}" title="${E(L(T.tipDay)(longD(day),Math.floor(a),f))}"></i>`;
+ }
+ const sw=streaks(wm,1),sf=streaks(fm,1);
+ const btn=(id,lab,cur,attr)=>`<button type="button" class="btn btn-secondary" data-amgi="${attr}" data-v="${id}" aria-pressed="${cur===id}">${E(lab)}</button>`;
+ const legend=mode==='both'?`<span><i class="amgi-c w3"></i> ${E(L(T.lgWork))}</span><span><i class="amgi-c f3"></i> ${E(L(T.lgFood))}</span><span><i class="amgi-c b"></i> ${E(L(T.lgBoth))}</span>`:
+  `<span>${E(L(T.legendLess))}</span>`+[0,1,2,3,4].map(i=>`<i class="amgi-c ${i?(mode==='work'?'w':'f')+i:''}"></i>`).join('')+`<span>${E(L(T.legendMore))}</span>`;
+ return `<div class="card"><h3>${E(L(T.heatTitle))}</h3>
+  <div class="amg-analysis-tabs">${['work','food','both'].map(k=>btn(k,L(T.modes[k]),mode,'hm')).join('')}</div>
+  <div class="amg-analysis-tabs">${[[26,L(T.hr.m6)],[52,L(T.hr.m12)]].map(([v,lab])=>`<button type="button" class="btn btn-secondary" data-amgi="hmr" data-v="${v}" aria-pressed="${ui.hmr===v}">${E(lab)}</button>`).join('')}</div>
+  <div class="amgi-heat" dir="ltr"><div class="amgi-months" style="grid-template-columns:repeat(${weeks},1fr)">${months}</div><div class="amgi-grid" style="grid-template-columns:repeat(${weeks},1fr)">${cells}</div></div>
+  <div class="amgi-legend">${legend}</div></div>
+  <div class="grid-eq mt"><div class="card"><div class="tiny">${E(L(T.workDays))}</div><b class="amgi-big">${wd}</b><p class="tiny">${E(L(T.streakNow))}: ${E(L(T.dayN)(sw.cur))}<br>${E(L(T.streakBest))}: ${E(L(T.dayN)(sw.best))}</p></div>
+  <div class="card"><div class="tiny">${E(L(T.foodDays))}</div><b class="amgi-big">${fd}</b><p class="tiny">${E(L(T.streakNow))}: ${E(L(T.dayN)(sf.cur))}<br>${E(L(T.streakBest))}: ${E(L(T.dayN)(sf.best))}</p></div></div>`;
+}
+
+// ---------- tab 4: weekly muscle volume ----------
+function weekAgg(sets,ws){
+ const we=addDays(ws,6),m=new Map();
+ sets.forEach(s=>{if(s.date<ws||s.date>we)return;const k=s.muscle||'';const o=m.get(k)||{sets:0,vol:0};o.sets++;o.vol+=s.vol;m.set(k,o);});
+ return m;
+}
+function volumeTab(sets){
+ const cur=startSat(today()),ws=addDays(cur,7*ui.off);
+ const agg=weekAgg(sets,ws),prev=weekAgg(sets,addDays(ws,-7));
+ const rows=[...agg.entries()].sort((a,b)=>b[1].sets-a[1].sets);
+ const tot=rows.reduce((a,[,o])=>a+o.sets,0),tv=rows.reduce((a,[,o])=>a+o.vol,0);
+ const mx=Math.max(1,...rows.map(([,o])=>o.sets));
+ const nav=`<div class="row-between"><button type="button" class="btn btn-secondary btn-sm" data-amgi="off" data-v="-1">${E(L(T.prev))}</button>${ui.off<0?`<button type="button" class="btn btn-secondary btn-sm" data-amgi="off" data-v="1">${E(L(T.next))}</button>`:`<span class="pill pill-green">${E(L(T.thisWeek))}</span>`}</div><p class="sub mt">${E(L(T.weekOf)(longD(ws)))}</p>`;
+ let body;
+ if(!rows.length)body=`<p class="sub">${E(L(T.noWeek))}</p>`;
+ else body=`<div class="grid-eq"><div><div class="tiny">${E(L(T.totalSets))}</div><b class="amgi-big">${tot}</b></div><div><div class="tiny">${E(L(T.totalVol))}</div><b class="amgi-big">${E(kfmt(tv))} ${E(L(T.kg))}</b></div></div>
+  <div class="amgi-bars mt">`+rows.map(([m,o])=>{
+   const p=prev.get(m),d=o.sets-(p?p.sets:0);
+   const dl=d===0?'':`<span class="tiny" style="color:${d>0?'var(--blue)':'var(--warn)'}"><bdi>${d>0?'+':''}${d}</bdi></span>`;
+   return `<div class="amgi-bar"><div class="row-between"><span>${E(muName(m))}</span><span class="tiny">${o.sets} ${E(L(T.sets))} · ${E(kfmt(o.vol))} ${E(L(T.kg))} ${dl}</span></div><div class="amgi-track"><div style="width:${(o.sets/mx*100).toFixed(1)}%"></div></div></div>`;
+  }).join('')+`</div><p class="tiny mt">${E(L(T.vsPrev))}: ${E(L(T.sets))}</p>`;
+ return `<div class="card"><h3>${E(L(T.volTitle))}</h3>${nav}</div><div class="card mt">${body}</div><p class="tiny mt">${E(L(T.volNote))}</p>`;
+}
+
+// ---------- page ----------
+function page(){
+ let sets=[];try{sets=allSets();}catch(e){console.warn('AMG insights',e);}
+ const tabs=Object.keys(T.tabs).map(k=>`<button type="button" class="btn btn-secondary" data-amgi="tab" data-v="${k}" aria-pressed="${ui.tab===k}">${E(L(T.tabs[k]))}</button>`).join('');
+ let body='';
+ try{body=ui.tab==='records'?recordsTab(sets):ui.tab==='heat'?heatTab():ui.tab==='volume'?volumeTab(sets):strengthTab(sets);}catch(e){console.warn('AMG insights',e);body='';}
+ return `<div class="amgi-page"><p class="tiny amgi-intro">${E(L(T.sub))}</p><div class="amg-analysis-tabs analysis-main-tabs">${tabs}</div>${body}</div>`;
+}
+function redraw(){const y=window.scrollY;render();window.scrollTo(0,y);}
+function bind(){
+ document.addEventListener('click',ev=>{
+  const b=ev.target.closest&&ev.target.closest('[data-amgi]');if(!b)return;
+  ev.preventDefault();ev.stopPropagation();
+  const a=b.getAttribute('data-amgi'),v=b.getAttribute('data-v');
+  if(a==='tab'){ui.tab=v;ui.all=false;}
+  else if(a==='hm')ui.hm=v;
+  else if(a==='hmr')ui.hmr=Number(v);
+  else if(a==='off')ui.off=Math.min(0,ui.off+Number(v));
+  else if(a==='showall')ui.all=!ui.all;
+  redraw();
+ },true);
+ document.addEventListener('change',ev=>{
+  const s=ev.target.closest&&ev.target.closest('[data-amgi-sel]');if(!s)return;
+  const k=s.getAttribute('data-amgi-sel');
+  if(k==='ex')ui.ex=s.value;else if(k==='range')ui.range=Number(s.value);
+  redraw();
+ },true);
+}
+// ---------- wiring ----------
+const grp=Navigation.groupFor('strength');
+if(grp&&Array.isArray(grp.routes)&&!grp.routes.includes('progress'))grp.routes.push('progress');
+AppPages.progress=()=>page();
+const _t=Navigation.title;Navigation.title=r=>r==='progress'?L(T.title):_t(r);
+const fx=h=>typeof h==='string'?h.split('>page.progress<').join('>'+E(L(T.title))+'<'):h;
+const _s=Navigation.subnav;Navigation.subnav=function(){return fx(_s.apply(this,arguments));};
+const _m=Navigation.sectionMenu;Navigation.sectionMenu=function(){return fx(_m.apply(this,arguments));};
+const css=document.createElement('style');css.id='amg-insights-style';
+css.textContent='.amgi-page h3{margin:0 0 8px}.amgi-intro{margin:0 0 10px;line-height:1.7}.amgi-recgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}.amgi-recgrid b{display:block;margin:2px 0}.amgi-big{display:block;font-size:26px;margin:4px 0}'
++'.amgi-heat{margin-top:12px;overflow:hidden}.amgi-months{display:grid;font-size:9px;color:var(--muted);height:14px;white-space:nowrap;overflow:visible}.amgi-months span{overflow:visible}'
++'.amgi-grid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,auto);gap:2px;margin-top:4px}.amgi-c{display:block;aspect-ratio:1;border-radius:2px;background:var(--panel2);border:1px solid var(--stroke);min-width:4px}.amgi-c.amgi-x{background:transparent;border-color:transparent}'
++'.amgi-c.w1{background:color-mix(in srgb,var(--accent) 35%,var(--panel2))}.amgi-c.w2{background:color-mix(in srgb,var(--accent) 60%,var(--panel2))}.amgi-c.w3{background:color-mix(in srgb,var(--accent) 82%,var(--panel2))}.amgi-c.w4{background:var(--accent2)}'
++'.amgi-c.f1{background:color-mix(in srgb,var(--blue) 35%,var(--panel2))}.amgi-c.f2{background:color-mix(in srgb,var(--blue) 60%,var(--panel2))}.amgi-c.f3{background:color-mix(in srgb,var(--blue) 82%,var(--panel2))}.amgi-c.f4{background:var(--blue)}.amgi-c.b{background:#6fd18b}'
++'.amgi-legend{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;font-size:11px;color:var(--muted)}.amgi-legend .amgi-c{display:inline-block;width:11px;height:11px;vertical-align:middle;aspect-ratio:auto}'
++'.amgi-track{height:9px;border-radius:6px;background:var(--panel2);margin-top:5px;overflow:hidden}.amgi-track div{height:100%;border-radius:6px;background:var(--accent2)}.amgi-bar{margin-bottom:12px}'
++'.amgi-banner{position:relative;overflow:hidden;border-inline-start:3px solid #6fd18b}.amgi-confetti{position:absolute;inset:0;pointer-events:none}.amgi-confetti span{position:absolute;top:-24px;font-size:18px;animation:amgiFall 1.9s ease-in forwards}'
++'@keyframes amgiFall{to{transform:translateY(230px) rotate(40deg);opacity:0}}@media (prefers-reduced-motion:reduce){.amgi-confetti{display:none}}';
+document.head.appendChild(css);
+bind();
+return {page,records:()=>records(allSets()),ui};
+})();
+
+}catch(amgTipsErr){console.warn("AMG add-ons init failed",amgTipsErr);}
 Appearance.initialize();
 if(fixedLocalUpperA)save();render();})();
 window.__AMG_APP_READY__=true;
