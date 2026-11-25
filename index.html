@@ -6006,6 +6006,7 @@ acsm09:{n:'ACSM Position Stand: Progression Models in Resistance Training for He
 nsca:{n:'NSCA Foundations of Fitness Programming',u:'https://www.nsca.com/contentassets/8323553f698a466a98220b21d9eb9a65/foundationsoffitnessprogramming_201508.pdf'},
 cdc:{n:'CDC: What Counts as Physical Activity for Adults (2024)',u:'https://www.cdc.gov/physical-activity-basics/adding-adults/what-counts.html'},
 aha:{n:'American Heart Association: Recommendations for Physical Activity in Adults',u:'https://www.heart.org/en/healthy-living/fitness/fitness-basics/aha-recs-for-physical-activity-in-adults'},
+ahaw:{n:'American Heart Association: Develop a Physical Activity Plan for You (Watch for warning signs)',u:'https://www.heart.org/en/health-topics/cardiac-rehab/getting-physically-active/develop-a-physical-activity-plan-for-you'},
 ahan:{n:'American Heart Association News (2021): Is exercise safe?',u:'https://www.heart.org/en/news/2021/12/15/and-just-like-that-everyone-wondered-is-exercise-safe'},
 nih:{n:'NIH Office of Dietary Supplements: Dietary Supplements for Exercise and Athletic Performance (Health Professional Fact Sheet)',u:'https://ods.od.nih.gov/factsheets/ExerciseAndAthleticPerformance-HealthProfessional/'},
 issnnt:{n:'ISSN Position Stand: Nutrient Timing (Kerksick et al., 2017)',u:'https://pubmed.ncbi.nlm.nih.gov/28919842/'},
@@ -6054,7 +6055,7 @@ const AMG_TIPS=[
 {id:'w06',c:'watch',s:['nata'],en:'For a cramp caused by muscle overload or fatigue, rest and gently stretch the cramping muscle until it eases.',ar:'لو التقلص سببه إجهاد العضلة أو التعب، ارتاح وطوّل العضلة بهدوء لحد ما يروح.'},
 {id:'w07',c:'watch',s:['nscas'],en:'Technique and safety come first. NSCA says proper technique, movement mechanics and safety should be emphasized to minimize injury risk.',ar:'التكنيك والأمان الأول. الـNSCA بتقول لازم نركز على التكنيك الصحيح وميكانيكا الحركة والسلامة عشان نقلل خطر الإصابة.'},
 {id:'w08',c:'watch',s:['nscay'],en:'NSCA safety checklist: use collars correctly, spot properly, handle barbells, dumbbells and plates with care, and start with sensible weights.',ar:'قائمة أمان الـNSCA: استخدم الكولارات صح، اعمل سبوت صح، تعامل بحرص مع البار والدمبل والأقراص، وابدأ بأوزان معقولة.'},
-{id:'w09',c:'watch',s:['ahan'],en:'Chest pain, or shortness of breath beyond what is normal for that effort, is a sign to slow down or stop.',ar:'ألم في الصدر أو ضيق نفس أكتر من المعتاد لنفس المجهود علامة إنك تبطّئ أو توقف.'},
+{id:'w09',c:'watch',s:['ahaw'],en:'Stop exercising right away if you get new chest pain, pressure or tightness, or unusual or severe shortness of breath, and get urgent medical help. If the pain lasts more than a few minutes, or comes with nausea or sweating, call emergency services.',ar:'وقّف التمرين فورًا لو حسّيت بألم أو ضغط أو انقباض جديد في الصدر، أو ضيق نفس شديد أو غير معتاد، واطلب مساعدة طبية عاجلة. لو الألم استمر أكتر من دقايق قليلة أو معاه غثيان أو عرق، اتصل بالإسعاف فورًا.'},
 {id:'w10',c:'watch',s:['ahan'],en:'If you have heart problems, asthma or diabetes, check with your doctor before starting a new exercise routine.',ar:'لو عندك مشاكل في القلب أو ربو أو سكر، استشير دكتورك قبل ما تبدأ روتين تمرين جديد.'},
 // ---- nutrition (ISSN, NIH, SDA)
 {id:'n10',c:'nutrition',s:['issnnt'],en:'Hitting your total daily protein matters most, and it is best spread across evenly spaced meals, roughly every 3 hours.',ar:'أهم حاجة إنك توصل لإجمالي البروتين اليومي، والأفضل توزعه على وجبات متباعدة بالتساوي، تقريبًا كل 3 ساعات.'},
@@ -6200,7 +6201,7 @@ function afterRender(){
    main.querySelectorAll('article.exercise[id^="exercise-"]').forEach(card=>{
     if(card.querySelector('.amg-form-tip'))return;
     const idx=Number(card.id.slice(9));const row=rows[idx];if(!row)return;
-    const names=[row._adaptedActual,row.exercise].filter(Boolean);
+    let act=null;try{act=coachActual(row);}catch(_){}const names=[act||row._adaptedActual||row.exercise].filter(Boolean);
     let e=null;for(const nm of names){e=cat.find(x=>x.name===nm);if(!e){try{const c=ExerciseLibrary.canonicalName(nm);e=cat.find(x=>x.name===c);}catch(_){}}if(e)break;}
     if(!e)return;
     const html=formBlock(e);if(!html)return;
@@ -6268,6 +6269,7 @@ const T={
  weeks:{ar:n=>n+' أسابيع',en:n=>n+' weeks'},all:{ar:'الكل',en:'All'},
  heaviest:{ar:'أثقل وزن في الأسبوع (كجم)',en:'Heaviest weight per week (kg)'},
  volume:{ar:'الحجم الأسبوعي (وزن × تكرارات، كجم)',en:'Weekly volume (weight × reps, kg)'},
+ noPeriod:{ar:'مفيش سجلات في الفترة دي',en:'No records in this period'},bwLabel:{ar:'وزن الجسم',en:'Bodyweight'},bestReps:{ar:'أكتر تكرارات',en:'Most reps'},repsPerWeek:{ar:'أكتر تكرارات في الأسبوع',en:'Most reps per week'},
  noData:{ar:'لسه مفيش مجموعات متسجلة هنا. أول ما تسجل تمرينك هتظهر الرسوم.',en:'No logged sets here yet. Charts appear as soon as you log your workouts.'},
  first:{ar:'أول وزن',en:'First'},latest:{ar:'أحدث وزن',en:'Latest'},best:{ar:'الأفضل',en:'Best'},change:{ar:'التغيير',en:'Change'},
  sessionsN:{ar:n=>n+' أسبوع تمرين',en:n=>n+' training weeks'},
@@ -6279,6 +6281,7 @@ const T={
  newPr:{ar:'رقم جديد',en:'New'},
  celebTitle:{ar:'🎉 كسرت رقم قياسي!',en:'🎉 New personal record!'},
  celebLine:{ar:(n,w,p)=>n+': '+w+' كجم (الرقم السابق '+p+' كجم)',en:(n,w,p)=>n+': '+w+' kg (previous best '+p+' kg)'},
+ celebLineR:{ar:(n,r,p)=>n+': '+r+' تكرار (الرقم السابق '+p+')',en:(n,r,p)=>n+': '+r+' reps (previous best '+p+')'},
  celebSub:{ar:'آخر 7 أيام. شغل جامد، كمّل.',en:'Last 7 days. Strong work, keep going.'},
  showAll:{ar:'اعرض كل التمارين',en:'Show all exercises'},showLess:{ar:'اعرض أقل',en:'Show less'},
  heatTitle:{ar:'خريطة الالتزام',en:'Consistency heatmap'},
@@ -6324,7 +6327,7 @@ function allSets(){
   if(!x||typeof x!=='object')return;
   const date=x.date;if(typeof date!=='string'||dateMs(date)===null)return;
   const w=Number(x.weight),r=Number(x.reps);
-  if(!(Number.isFinite(w)&&w>0&&Number.isFinite(r)&&r>=1))return;
+  if(!(Number.isFinite(w)&&w>=0&&Number.isFinite(r)&&r>=1))return;
   let name=x.actualExercise||x.exercise;if(!name)return;
   try{name=ExerciseLibrary.canonicalName(name)||name;}catch(e){}
   out.push({date,name,w,r,vol:w*r,muscle:muscleOf(name,x),src});
@@ -6397,15 +6400,23 @@ function strengthTab(sets){
  mine.forEach(s=>{const k=startSat(s.date);if(k<first||k>last)return;maxW.set(k,Math.max(maxW.get(k)||0,s.w));vol.set(k,(vol.get(k)||0)+s.vol);});
  const wv=wk.map(k=>maxW.has(k)?maxW.get(k):null),vv=wk.map(k=>vol.get(k)||0),lb=wk.map(shortD);
  const have=wv.filter(v=>v!=null);
+ const bw=mine.every(s=>s.w===0);
+ const maxR=new Map();mine.forEach(s=>{const k=startSat(s.date);if(k<first||k>last)return;maxR.set(k,Math.max(maxR.get(k)||0,s.r));});
  const ex=list.find(x=>x.name===ui.ex);
  let sum='';
  if(have.length){
   const f=have[0],l=have[have.length-1],b=Math.max(...have),ch=l-f,pc=f>0?Math.round(ch/f*100):0;
   sum=`<div class="grid-3 mt"><div><div class="tiny">${E(L(T.first))}</div><b>${n2(f)} ${E(L(T.kg))}</b></div><div><div class="tiny">${E(L(T.latest))}</div><b>${n2(l)} ${E(L(T.kg))}</b></div><div><div class="tiny">${E(L(T.best))}</div><b>${n2(b)} ${E(L(T.kg))}</b></div></div><p class="tiny mt">${E(L(T.change))}: <bdi>${ch>0?'+':''}${n2(ch)} ${E(L(T.kg))} (${ch>0?'+':''}${pc}%)</bdi> · ${E(L(T.sessionsN)(ex.weeks.size))} · ${E(L(T.setsN)(ex.n))}</p>`;
  }
- const opts=list.map(x=>`<option value="${E(x.name)}"${x.name===ui.ex?' selected':''}>${E(exName(x.name))}</option>`).join('');
- const rg=[[8,L(T.weeks)(8)],[12,L(T.weeks)(12)],[26,L(T.weeks)(26)],[0,L(T.all)]].map(([v,t_])=>`<option value="${v}"${v===ui.range?' selected':''}>${E(t_)}</option>`).join('');
- return `<div class="card"><div class="form-grid two"><div><label>${E(L(T.pickEx))}</label><select data-amgi-sel="ex">${opts}</select></div><div><label>${E(L(T.range))}</label><select data-amgi-sel="range">${rg}</select></div></div>${sum}</div>
+ const opts0=list.map(x=>`<option value="${E(x.name)}"${x.name===ui.ex?' selected':''}>${E(exName(x.name))}</option>`).join('');
+ const opts=opts0;const rg=[[8,L(T.weeks)(8)],[12,L(T.weeks)(12)],[26,L(T.weeks)(26)],[0,L(T.all)]].map(([v,t_])=>`<option value="${v}"${v===ui.range?' selected':''}>${E(t_)}</option>`).join('');
+ const head=`<div class="card"><div class="form-grid two"><div><label>${E(L(T.pickEx))}</label><select data-amgi-sel="ex">${opts}</select></div><div><label>${E(L(T.range))}</label><select data-amgi-sel="range">${rg}</select></div></div>`;
+ if(!maxR.size)return head+`<p class="sub mt amgi-empty">${E(L(T.noPeriod))}</p></div>`;
+ if(bw){
+  const rv=wk.map(k=>maxR.has(k)?maxR.get(k):null);
+  return head+`<p class="tiny mt">${E(L(T.bwLabel))} · ${E(L(T.setsN)(ex.n))} · ${E(L(T.sessionsN)(ex.weeks.size))}</p></div><div class="card mt"><h3>${E(L(T.repsPerWeek))}</h3>${svgLine(rv,lb,'var(--accent2)',n2)}</div>`;
+ }
+ return head+sum+`</div>
  <div class="card mt"><h3>${E(L(T.heaviest))}</h3>${svgLine(wv,lb,'var(--accent2)',n2)}</div>
  <div class="card mt"><h3>${E(L(T.volume))}</h3>${svgBars(vv,lb,'var(--blue)',kfmt)}</div>`;
 }
@@ -6415,18 +6426,21 @@ function records(sets){
  const by=new Map();
  sets.forEach(s=>{const a=by.get(s.name)||[];a.push(s);by.set(s.name,a);});
  const out=[];
- by.forEach((arr,name)=>{
+ by.forEach((arr0,name)=>{
+  const arr=arr0.slice().sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
+  const bw=arr.every(s=>s.w===0);
+  // strictly-greater only: the record date is the FIRST day the best value was reached
   let h=null,e=null,v=null;
   arr.forEach(s=>{
-   if(!h||s.w>h.w||(s.w===h.w&&s.date>h.date))h=s;
-   const e1=s.w*(1+s.r/30);const ec=s.r<=12?e1:0;
-   if(ec&&(!e||ec>e.e1||(ec===e.e1&&s.date>e.date)))e={...s,e1:ec};
-   if(!v||s.vol>v.vol||(s.vol===v.vol&&s.date>v.date))v=s;
+   if(!h||(bw?s.r>h.r:s.w>h.w))h=s;
+   const e1=s.w*(1+s.r/30);
+   if(s.r<=12&&e1>0&&(!e||e1>e.e1))e={...s,e1};
+   if(!v||s.vol>v.vol)v=s;
   });
-  // previous best before the record date, to tell a broken record from a first entry
   const before=arr.filter(s=>s.date<h.date);
-  const prev=before.length?Math.max(...before.map(s=>s.w)):null;
-  out.push({name,h,e,v,prev,isNew:prev!=null&&h.w>prev&&h.date>=addDays(today(),-7)&&h.date<=today()});
+  const prev=before.length?(bw?Math.max(...before.map(s=>s.r)):Math.max(...before.map(s=>s.w))):null;
+  const hv=bw?h.r:h.w;
+  out.push({name,bw,h,e,v,prev,isNew:prev!=null&&hv>prev&&h.date>=addDays(today(),-7)&&h.date<=today()});
  });
  return out.sort((a,b)=>b.h.date.localeCompare(a.h.date)||a.name.localeCompare(b.name));
 }
@@ -6446,12 +6460,12 @@ function recordsTab(sets){
  const news=recs.filter(r=>r.isNew);
  let banner='';
  if(news.length){
-  banner=`<div class="card amgi-banner">${celebrate(news)}<h3>${E(L(T.celebTitle))}</h3>`+news.map(r=>`<p><b>${E(L(T.celebLine)(exName(r.name),n2(r.h.w),n2(r.prev)))}</b></p>`).join('')+`<p class="tiny">${E(L(T.celebSub))}</p></div>`;
+  banner=`<div class="card amgi-banner">${celebrate(news)}<h3>${E(L(T.celebTitle))}</h3>`+news.map(r=>`<p><b>${E(r.bw?L(T.celebLineR)(exName(r.name),r.h.r,r.prev):L(T.celebLine)(exName(r.name),n2(r.h.w),n2(r.prev)))}</b></p>`).join('')+`<p class="tiny">${E(L(T.celebSub))}</p></div>`;
  }
  const shown=ui.all?recs:recs.slice(0,12);
  const rows=shown.map(r=>`<div class="card mt amgi-rec"><div class="row-between"><h3 class="ltr">${E(exName(r.name))}</h3>${r.isNew?`<span class="pill pill-green">🎉 ${E(L(T.newPr))}</span>`:''}</div>
-  <div class="amgi-recgrid"><div><div class="tiny">${E(L(T.heavy))}</div><b>${n2(r.h.w)} ${E(L(T.kg))}</b><div class="tiny">${E(L(T.repsW)(r.h.r))} · ${E(shortD(r.h.date))}</div></div>
-  <div><div class="tiny">${E(L(T.e1))}</div><b>${r.e?n2(r.e.e1)+' '+E(L(T.kg)):'—'}</b><div class="tiny">${r.e?E(shortD(r.e.date)):''}</div></div>
+  <div class="amgi-recgrid"><div><div class="tiny">${E(r.bw?L(T.bestReps):L(T.heavy))}</div><b>${r.bw?E(L(T.repsW)(r.h.r)):n2(r.h.w)+' '+E(L(T.kg))}</b><div class="tiny">${r.bw?E(L(T.bwLabel)):E(L(T.repsW)(r.h.r))} · ${E(shortD(r.h.date))}</div></div>
+  <div><div class="tiny">${E(L(T.e1))}</div><b>${r.e&&!r.bw?n2(r.e.e1)+' '+E(L(T.kg)):'—'}</b><div class="tiny">${r.e?E(shortD(r.e.date)):''}</div></div>
   <div><div class="tiny">${E(L(T.bestVol))}</div><b>${n2(r.v.vol)} ${E(L(T.kg))}</b><div class="tiny">${n2(r.v.w)}×${r.v.r} · ${E(shortD(r.v.date))}</div></div></div></div>`).join('');
  const more=recs.length>12?`<button type="button" class="btn btn-secondary mt" data-amgi="showall">${E(ui.all?L(T.showLess):L(T.showAll)+' ('+recs.length+')')}</button>`:'';
  return `${banner}<div class="card mt"><h3>${E(L(T.recTitle))}</h3><p class="tiny">${E(L(T.recNote))}</p></div>${rows}${more}`;
@@ -6477,10 +6491,10 @@ function heatTab(){
  const weeks=ui.hmr,end=today(),start=addDays(startSat(end),-7*(weeks-1));
  const mode=ui.hm;
  let cells='',months='',lastM='';
- const col=[];
+ const col=[];let lastW=-9;
  for(let w=0;w<weeks;w++){
   const ws=addDays(start,7*w);const m=monthD(ws);
-  col.push(m!==lastM?m:'');lastM=m;
+  if(m!==lastM&&w>=lastW+3){col.push(m);lastW=w;}else col.push('');if(m!==lastM)lastM=m;
  }
  months=col.map(x=>`<span>${E(x)}</span>`).join('');
  let wd=0,fd=0;
@@ -6502,7 +6516,7 @@ function heatTab(){
  return `<div class="card"><h3>${E(L(T.heatTitle))}</h3>
   <div class="amg-analysis-tabs">${['work','food','both'].map(k=>btn(k,L(T.modes[k]),mode,'hm')).join('')}</div>
   <div class="amg-analysis-tabs">${[[26,L(T.hr.m6)],[52,L(T.hr.m12)]].map(([v,lab])=>`<button type="button" class="btn btn-secondary" data-amgi="hmr" data-v="${v}" aria-pressed="${ui.hmr===v}">${E(lab)}</button>`).join('')}</div>
-  <div class="amgi-heat" dir="ltr"><div class="amgi-months" style="grid-template-columns:repeat(${weeks},1fr)">${months}</div><div class="amgi-grid" style="grid-template-columns:repeat(${weeks},1fr)">${cells}</div></div>
+  <div class="amgi-heat" dir="ltr" tabindex="0"><div class="amgi-heat-in" style="width:${weeks*13}px"><div class="amgi-months" style="grid-template-columns:repeat(${weeks},11px)">${months}</div><div class="amgi-grid" style="grid-template-columns:repeat(${weeks},11px)">${cells}</div></div></div>
   <div class="amgi-legend">${legend}</div></div>
   <div class="grid-eq mt"><div class="card"><div class="tiny">${E(L(T.workDays))}</div><b class="amgi-big">${wd}</b><p class="tiny">${E(L(T.streakNow))}: ${E(L(T.dayN)(sw.cur))}<br>${E(L(T.streakBest))}: ${E(L(T.dayN)(sw.best))}</p></div>
   <div class="card"><div class="tiny">${E(L(T.foodDays))}</div><b class="amgi-big">${fd}</b><p class="tiny">${E(L(T.streakNow))}: ${E(L(T.dayN)(sf.cur))}<br>${E(L(T.streakBest))}: ${E(L(T.dayN)(sf.best))}</p></div></div>`;
@@ -6570,8 +6584,8 @@ const _s=Navigation.subnav;Navigation.subnav=function(){return fx(_s.apply(this,
 const _m=Navigation.sectionMenu;Navigation.sectionMenu=function(){return fx(_m.apply(this,arguments));};
 const css=document.createElement('style');css.id='amg-insights-style';
 css.textContent='.amgi-page h3{margin:0 0 8px}.amgi-intro{margin:0 0 10px;line-height:1.7}.amgi-recgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}.amgi-recgrid b{display:block;margin:2px 0}.amgi-big{display:block;font-size:26px;margin:4px 0}'
-+'.amgi-heat{margin-top:12px;overflow:hidden}.amgi-months{display:grid;font-size:9px;color:var(--muted);height:14px;white-space:nowrap;overflow:visible}.amgi-months span{overflow:visible}'
-+'.amgi-grid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,auto);gap:2px;margin-top:4px}.amgi-c{display:block;aspect-ratio:1;border-radius:2px;background:var(--panel2);border:1px solid var(--stroke);min-width:4px}.amgi-c.amgi-x{background:transparent;border-color:transparent}'
++'.amgi-heat{margin-top:12px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding-bottom:6px;max-width:100%}.amgi-heat-in{min-width:max-content}.amgi-months{display:grid;font-size:9px;color:var(--muted);height:14px;white-space:nowrap;overflow:visible}.amgi-months span{overflow:visible}'
++'.amgi-grid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,auto);gap:2px;margin-top:4px}.amgi-c{display:block;aspect-ratio:1;border-radius:2px;background:var(--panel2);border:1px solid var(--stroke);min-width:11px;width:11px;height:11px;aspect-ratio:auto}.amgi-c.amgi-x{background:transparent;border-color:transparent}'
 +'.amgi-c.w1{background:color-mix(in srgb,var(--accent) 35%,var(--panel2))}.amgi-c.w2{background:color-mix(in srgb,var(--accent) 60%,var(--panel2))}.amgi-c.w3{background:color-mix(in srgb,var(--accent) 82%,var(--panel2))}.amgi-c.w4{background:var(--accent2)}'
 +'.amgi-c.f1{background:color-mix(in srgb,var(--blue) 35%,var(--panel2))}.amgi-c.f2{background:color-mix(in srgb,var(--blue) 60%,var(--panel2))}.amgi-c.f3{background:color-mix(in srgb,var(--blue) 82%,var(--panel2))}.amgi-c.f4{background:var(--blue)}.amgi-c.b{background:#6fd18b}'
 +'.amgi-legend{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;font-size:11px;color:var(--muted)}.amgi-legend .amgi-c{display:inline-block;width:11px;height:11px;vertical-align:middle;aspect-ratio:auto}'
@@ -6580,6 +6594,8 @@ css.textContent='.amgi-page h3{margin:0 0 8px}.amgi-intro{margin:0 0 10px;line-h
 +'@keyframes amgiFall{to{transform:translateY(230px) rotate(40deg);opacity:0}}@media (prefers-reduced-motion:reduce){.amgi-confetti{display:none}}';
 document.head.appendChild(css);
 bind();
+const _r=render;
+render=function(){const r=_r.apply(this,arguments);try{const h=document.querySelector('.amgi-heat');if(h)h.scrollLeft=h.scrollWidth;}catch(e){}return r;};
 return {page,records:()=>records(allSets()),ui};
 })();
 
